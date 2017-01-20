@@ -11,6 +11,7 @@
 #include "DataModel.h"
 #include "Display.h"
 #include "InputControl.h"
+#include "Menu.h"
 
 #define dmxPin 2
 
@@ -24,6 +25,8 @@ void setup() {
   DmxSimple.write(dmxChannel,255);
   displaySetup();
   inputSetup();
+  drawMenu(0);
+  updateMenu(1,0);
 }
 
 void loop() {
