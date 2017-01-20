@@ -27,12 +27,11 @@ void readKnobs(){
   for(int knob = 0;knob<VALUEKNOBS;knob++){
     if (news[knob] != olds[knob] ){
       if(analogRead(knob)>127){
-        pressed = true;
-      }else{
         pressed = false;
+      }else{
+        pressed = true;
       }
-//      positions[knob] = calculateValue(positions[knob],news[knob]-olds[knob],pressed);
-      setKnobValue(knob,news[knob]);
+      setKnobValue(knob,news[knob],news[knob]-olds[knob],pressed);
 //      showValue((int)positions[knob],knob*7+1);
       olds[knob] = news[knob];
 //      // Save values

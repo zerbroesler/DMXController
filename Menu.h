@@ -25,7 +25,7 @@ void drawMenu(int number){
   lcd.setCursor(0,1);
   lcd.print(menuTexts[number*3+1]);
   lcd.setCursor(0,2);
-  lcd.print(menuTexts[number*3+1]);
+  lcd.print(menuTexts[number*3+2]);
 }
 
 void updateMenu(int number, int item){

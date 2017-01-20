@@ -16,8 +16,12 @@ int getKnobValueLog(int knobNumber){
   return (int)(knobs[knobNumber]*knobs[knobNumber]/255);
 }
 
-void setKnobValue(int knobNumber,long value){
+void setKnobValue(int knobNumber,long value,long relative,boolean pressed){
   value -= knobsRelative[knobNumber];
+  if(pressed==false){
+    value += relative*2;
+    knobsRelative[knobNumber] -= relative*2;
+  }
   if(value < 0){
     knobsRelative[knobNumber] += value;
     value = 0;
