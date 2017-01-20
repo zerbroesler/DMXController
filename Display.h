@@ -46,6 +46,7 @@ void showduration(int start){
   lcd.print(mil);
 }
 void showLights(int selected){
+
   lcd.setCursor(0,0);
   lcd.print(" 1  2  3  4  5  6  7");
   if(selected>0){
@@ -69,13 +70,7 @@ void showKnobs(){
 
   int knobValue;
   for(int knob = 0;knob<VALUEKNOBS;knob++){
-//    if (news[knob] != olds[knob] ){
-//      if(analogRead(knob)>127){
-//        pressed = true;
-//      }else{
-//        pressed = false;
-//      }
-//      positions[knob] = calculateValue(positions[knob],news[knob]-olds[knob],pressed);
+//     positions[knob] = calculateValue(positions[knob],news[knob]-olds[knob],pressed);
       if(getKnobChanged(knob)){
         knobValue = getKnobValueLog(knob);
         showValue(knobValue,knob*7+1,3);
@@ -87,6 +82,10 @@ void showKnobs(){
   }
 }
 
-
-
+void initMenu(){
+  lcd.setCursor(0,0);
+  lcd.print(" 1  2  3  4  5  6  7");
+  menuentries[0]=0
+  
+}
 
