@@ -1,10 +1,11 @@
 #include "Arduino.h"
 #include <Encoder.h>
 
-Encoder knob0(5, 4);
-Encoder knob1(7, 6);
-Encoder knob2(9, 8);
-Encoder knob3(10,11);
+Encoder knob3(3, 24);
+
+Encoder knob0(28, 2);
+Encoder knob1(32,18);
+Encoder knob2(36,19);
 // Pins for Knob buttons
 void inputSetup(){
   pinMode(A0,INPUT_PULLUP);

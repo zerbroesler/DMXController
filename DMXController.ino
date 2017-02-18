@@ -2,7 +2,12 @@
 // 3 rotary encoders are used to control the values, push down for slow changes
 // 1 rotary encoder is used to navigate through the menus, push down to select
 // 
-// Last Nano Release
+// Version for Arduino mega
+
+
+
+
+
 
 
 #define NumKnobs 4
@@ -15,7 +20,7 @@
 #include "InputControl.h"
 #include "Menu.h"
 
-#define dmxPin 2
+#define dmxPin 22
 
 
 float positions[NumKnobs];
