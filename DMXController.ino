@@ -2,6 +2,8 @@
 // 3 rotary encoders are used to control the values, push down for slow changes
 // 1 rotary encoder is used to navigate through the menus, push down to select
 // 
+// Last Nano Release
+
 
 #define NumKnobs 4
 #define dmxChannel 4
