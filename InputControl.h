@@ -1,17 +1,30 @@
 #include "Arduino.h"
 #include <Encoder.h>
 
-Encoder knob3(3, 24);
+#define PUSH_0 30
+#define PUSH_1 34
+#define PUSH_2 38
 
+// Left, Middle, Right below display
 Encoder knob0(28, 2);
 Encoder knob1(32,18);
 Encoder knob2(36,19);
+// Push down on knobs
+
+// Big Selector
+Encoder knob3(3, 24);
+// Push down
+#define PUSH_3 26
+#define BACK3 40  // Button next to the selector to go back
+int pushpin[4]={PUSH_0,PUSH_1,PUSH_2,PUSH_3};
+
 // Pins for Knob buttons
 void inputSetup(){
-  pinMode(A0,INPUT_PULLUP);
-  pinMode(A1,INPUT_PULLUP);
-  pinMode(A2,INPUT_PULLUP);
-  pinMode(A3,INPUT_PULLUP);
+  pinMode(PUSH_0,INPUT_PULLUP);
+  pinMode(PUSH_1,INPUT_PULLUP);
+  pinMode(PUSH_2,INPUT_PULLUP);
+  pinMode(PUSH_3,INPUT_PULLUP);
+  pinMode(BACK3,INPUT_PULLUP);
 }
 
 boolean pressed = false;
@@ -27,11 +40,7 @@ void readKnobs(){
 
   for(int knob = 0;knob<VALUEKNOBS;knob++){
     if (news[knob] != olds[knob] ){
-      if(analogRead(knob)>127){
-        pressed = false;
-      }else{
-        pressed = true;
-      }
+      pressed = !digitalRead(pushpin[knob]);
       setKnobValue(knob,news[knob],news[knob]-olds[knob],pressed);
 //      showValue((int)positions[knob],knob*7+1);
       olds[knob] = news[knob];
