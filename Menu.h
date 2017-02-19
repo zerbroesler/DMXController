@@ -9,27 +9,40 @@ struct menu{
   byte x;
   byte y;
 };
+int menuNumber = 0;
+int menuEntry = 0;
 
 
-char menuTexts[][21] = {"12345678901234567890",
-                        "Menu Line2"          ,
-                        "          "          };
+char menuTexts[][3][21] = {{"12345678901234567890",
+                        "Menu Line2",
+                        "          "},
+                        {"Second Menu",
+                        "SM Line2",
+                        ""          }};
 
 menu menuItems[][10] = {
   {{ 1,2 }, {1,1}},
   {{ 3,1 }, {1,1}}};
 
-void drawMenu(int number){
-  lcd.setCursor(0,0);
-  lcd.print(menuTexts[number*3]);
-  lcd.setCursor(0,1);
-  lcd.print(menuTexts[number*3+1]);
-  lcd.setCursor(0,2);
-  lcd.print(menuTexts[number*3+2]);
+void setMenu(int number){
+  menuNumber = number;
 }
 
-void updateMenu(int number, int item){
-  menu menuItem = menuItems[number][item];
+void setMenuEntry(int number){
+  menuEntry = number;
+}
+
+void drawMenu(){
+  lcd.setCursor(0,0);
+  lcd.print(menuTexts[menuNumber][0]);
+  lcd.setCursor(0,1);
+  lcd.print(menuTexts[menuNumber][1]);
+  lcd.setCursor(0,2);
+  lcd.print(menuTexts[menuNumber][2]);
+}
+
+void updateMenu(){
+  menu menuItem = menuItems[menuNumber][menuEntry];
   lcd.setCursor(menuItem.x,menuItem.y);
   lcd.print("*");
 }

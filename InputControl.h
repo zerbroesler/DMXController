@@ -3,7 +3,7 @@
 
 #define PUSH_0 30
 #define PUSH_1 34
-#define PUSH_2 38
+#define PUSH_2 38 
 
 // Left, Middle, Right below display
 Encoder knob0(28, 2);

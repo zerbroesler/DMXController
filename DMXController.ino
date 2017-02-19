@@ -32,8 +32,10 @@ void setup() {
   DmxSimple.write(dmxChannel,255);
   displaySetup();
   inputSetup();
-  drawMenu(0);
-  updateMenu(1,0);
+  setMenu(0);
+  drawMenu();
+  setMenuEntry(0);
+  updateMenu();
 }
 
 void loop() {
