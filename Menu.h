@@ -9,7 +9,11 @@ struct menuItem{
   byte x;
   byte y;
 };
+struct menuText{
+  char text[3][21];
+};
 struct menuProperty{
+  struct menuText menuText;
   byte menuLength;
   struct menuItem menuItems[10];
 };
@@ -19,16 +23,14 @@ int oldMenuNumber = -1;
 int oldMenuEntry = 1;
 bool menuChanged = false;
 
-char menuTexts[][3][21] = {{"12345678901234567890",
-                        "Menu Line2",
-                        "          "},
-                        {"Second Menu",
-                        "SM Line2",
-                        ""          }};
-
-
 menuProperty menuProperties[] = {
+  "12345678901234567890",
+   "Menu Line2",
+   "          ",
   2, {{ 1,2 },{1,1}},
+  "Second Menu",
+  "Menu Line2",
+  "          ",
   3, {{ 3,1 },{5,1},{8,1}}
 };
 
@@ -69,11 +71,11 @@ void drawMenu(){
     return;
   }
   lcdSetCursor(0,0);
-  lcd.print(menuTexts[menuNumber][0]);
+  lcd.print(menuProperties[menuNumber].menuText.text[0]);
   lcd.setCursor(0,1);
-  lcd.print(menuTexts[menuNumber][1]);
+  lcd.print(menuProperties[menuNumber].menuText.text[1]);
   lcd.setCursor(0,2);
-  lcd.print(menuTexts[menuNumber][2]);
+  lcd.print(menuProperties[menuNumber].menuText.text[2]);
   oldMenuNumber=menuNumber;
 }
 
