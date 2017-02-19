@@ -50,10 +50,11 @@ void readKnobs(){
 void readMenuKnob(){
   news[MENUKNOB] = knob3.read();
   if (news[MENUKNOB] != olds[MENUKNOB] ){
-      pressed = !digitalRead(pushpin[MENUKNOB]);
-      setMenuValue(news[MENUKNOB]-olds[MENUKNOB],pressed);
+      setMenuValue(news[MENUKNOB]-olds[MENUKNOB]);
       olds[MENUKNOB] = news[MENUKNOB];
   }
+  pressed = !digitalRead(pushpin[MENUKNOB]);
+  setMenuPressed(pressed);
 }
 
 //      showValue((int)positions[knob],knob*7+1);

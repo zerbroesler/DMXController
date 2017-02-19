@@ -34,7 +34,7 @@ void setup() {
 void loop() {
   readKnobs();
   readMenuKnob();
-  updateMenuEntry();
+  updateMenu();
   drawMenu();
   drawMenuEntry();
   updateDisplay();

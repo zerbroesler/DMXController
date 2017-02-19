@@ -2,7 +2,7 @@ long knobs[NumKnobs];
 long knobsRelative[NumKnobs];
 long menuRelative = 0;
 boolean knobChanged[NumKnobs];
-
+boolean menuPressed = false;
 
 long getKnobValue(int knobNumber){
   knobChanged[knobNumber]=false;
@@ -34,10 +34,21 @@ void setKnobValue(int knobNumber,long value,long relative,boolean pressed){
   knobs[knobNumber] = value;
   knobChanged[knobNumber]=true;
 }
-void setMenuValue(long relative,boolean pressed){
+void setMenuValue(long relative){
   menuRelative+=relative;
 }
 long getMenuRelative(){
   return menuRelative;
+}
+void setMenuPressed(bool pressed){
+  if(pressed == true){
+    menuPressed = true;
+  }
+}
+
+bool getMenuPressed(){
+  bool wasPressed = menuPressed;
+  menuPressed = false;
+  return wasPressed;
 }
 
