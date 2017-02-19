@@ -1,5 +1,6 @@
 long knobs[NumKnobs];
 long knobsRelative[NumKnobs];
+long menuRelative = 0;
 boolean knobChanged[NumKnobs];
 
 
@@ -32,5 +33,11 @@ void setKnobValue(int knobNumber,long value,long relative,boolean pressed){
   }
   knobs[knobNumber] = value;
   knobChanged[knobNumber]=true;
+}
+void setMenuValue(long relative,boolean pressed){
+  menuRelative+=relative;
+}
+long getMenuRelative(){
+  return menuRelative;
 }
 

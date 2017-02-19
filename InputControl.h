@@ -3,7 +3,7 @@
 
 #define PUSH_0 30
 #define PUSH_1 34
-#define PUSH_2 38 
+#define PUSH_2 38
 
 // Left, Middle, Right below display
 Encoder knob0(28, 2);
@@ -16,6 +16,7 @@ Encoder knob3(3, 24);
 // Push down
 #define PUSH_3 26
 #define BACK3 40  // Button next to the selector to go back
+#define MENUKNOB 3
 int pushpin[4]={PUSH_0,PUSH_1,PUSH_2,PUSH_3};
 
 // Pins for Knob buttons
@@ -36,19 +37,30 @@ void readKnobs(){
   news[0] = knob0.read();
   news[1] = knob1.read();
   news[2] = knob2.read();
-  news[3] = knob3.read();
 
   for(int knob = 0;knob<VALUEKNOBS;knob++){
     if (news[knob] != olds[knob] ){
       pressed = !digitalRead(pushpin[knob]);
       setKnobValue(knob,news[knob],news[knob]-olds[knob],pressed);
-//      showValue((int)positions[knob],knob*7+1);
       olds[knob] = news[knob];
-//      // Save values
-//      DmxSimple.write(dmxChannel+knob+1,(int)positions[knob]);
     }
   }
 }
+
+void NavigateMenu(){
+  // Navigates through menu according to the menu encoder
+  news[MENUKNOB] = knob3.read();
+  if (news[MENUKNOB] != olds[MENUKNOB] ){
+      pressed = !digitalRead(pushpin[MENUKNOB]);
+      setMenuValue(news[MENUKNOB]-olds[MENUKNOB],pressed);
+      olds[MENUKNOB] = news[MENUKNOB];
+  }
+}
+
+//      showValue((int)positions[knob],knob*7+1);
+//      // Save values
+//      DmxSimple.write(dmxChannel+knob+1,(int)positions[knob]);
+
 
 float calculateValue(float value,long difference,boolean press){
   if(press == false){
@@ -66,3 +78,4 @@ float calculateValue(float value,long difference,boolean press){
   }
   return value;
 }
+

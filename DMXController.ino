@@ -17,8 +17,8 @@
 // Project includes
 #include "DataModel.h"
 #include "Display.h"
-#include "InputControl.h"
 #include "Menu.h"
+#include "InputControl.h"
 
 #define dmxPin 22
 
@@ -37,9 +37,10 @@ void setup() {
 }
 
 void loop() {
-  drawMenu();
-  updateMenuEntry();
   readKnobs();
+
+  drawMenu();
+  drawMenuEntry();
   updateDisplay();
 }
 

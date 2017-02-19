@@ -33,12 +33,36 @@ void setMenu(int number){
 void setMenuEntry(int number){
   menuEntry = number;
 }
+void nextMenuEntry(){
+  menuEntry++;
+  if(menuEntry>1){
+    menuEntry=0;
+  }
+}
+void previousMenuEntry(){
+  menuEntry--;
+  if(menuEntry<0){
+    menuEntry=1;
+  }
+}
+
+void updateMenuEntry(){
+  long menuRelative = getMenuRelative();
+  if(menuRelative>=4){
+    setMenuValue(-4,false);
+    nextMenuEntry();
+  }
+  if(menuRelative <=-4){
+    setMenuValue(4,false);
+    previousMenuEntry();
+  }
+}
 
 void drawMenu(){
   if(oldMenuNumber==menuNumber){
     return;
   }
-  lcd.setCursor(0,0);
+  lcdSetCursor(0,0);
   lcd.print(menuTexts[menuNumber][0]);
   lcd.setCursor(0,1);
   lcd.print(menuTexts[menuNumber][1]);
@@ -47,7 +71,7 @@ void drawMenu(){
   oldMenuNumber=menuNumber;
 }
 
-void updateMenuEntry(){
+void drawMenuEntry(){
   if(oldMenuEntry == menuEntry){
     return;
   }

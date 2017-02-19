@@ -12,6 +12,7 @@ LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars
 
 long knobValues[NumKnobs];
 void showKnobs();
+void showMenuEntry();
 char buf[3];
 
 void displaySetup() {
@@ -82,9 +83,11 @@ void showKnobs(){
   }
 }
 
-void initMenu(){
-  lcd.setCursor(0,0);
-  lcd.print(" 1  2  3  4  5  6  7");
-  
+// Proxies for other modules
+void lcdSetCursor(int x, int y){
+  lcd.setCursor(x,y);
+}
+void lcdPrint(String text){
+  lcd.print(text);
 }
 
