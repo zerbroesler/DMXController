@@ -3,6 +3,7 @@ long knobsRelative[NumKnobs];
 long menuRelative = 0;
 boolean knobChanged[NumKnobs];
 boolean menuPressed = false;
+boolean menuReleased = false;
 
 long getKnobValue(int knobNumber){
   knobChanged[knobNumber]=false;
@@ -41,8 +42,15 @@ long getMenuRelative(){
   return menuRelative;
 }
 void setMenuPressed(bool pressed){
-  if(pressed == true){
-    menuPressed = true;
+  // Only set pressed when the button was released
+  // between two calles of setMenuPressed
+  if(pressed == true ){
+    if(menuReleased == true ) {
+      menuPressed = true;
+      menuReleased = false;
+    }
+  }else{
+    menuReleased = true;
   }
 }
 

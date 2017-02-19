@@ -45,15 +45,6 @@ void showduration(int start){
   lcd.setCursor(2,2);
   lcd.print(mil);
 }
-void showLights(int selected){
-
-  lcd.setCursor(0,0);
-  lcd.print(" 1  2  3  4  5  6  7");
-  if(selected>0){
-    lcd.setCursor((selected-1)*3,0);
-    lcd.print("*");
-  }
-}
 
 void updateDisplay(){  
   if(slowdisplay == 0){
