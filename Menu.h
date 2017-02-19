@@ -11,7 +11,9 @@ struct menu{
 };
 int menuNumber = 0;
 int menuEntry = 0;
-
+int oldMenuNumber = -1;
+int oldMenuEntry = -1;
+bool menuChanged = false;
 
 char menuTexts[][3][21] = {{"12345678901234567890",
                         "Menu Line2",
@@ -33,17 +35,28 @@ void setMenuEntry(int number){
 }
 
 void drawMenu(){
+  if(oldMenuNumber==menuNumber){
+    return;
+  }
   lcd.setCursor(0,0);
   lcd.print(menuTexts[menuNumber][0]);
   lcd.setCursor(0,1);
   lcd.print(menuTexts[menuNumber][1]);
   lcd.setCursor(0,2);
   lcd.print(menuTexts[menuNumber][2]);
+  oldMenuNumber=menuNumber;
 }
 
-void updateMenu(){
+void updateMenuEntry(){
+  if(oldMenuEntry == menuEntry){
+    return;
+  }
   menu menuItem = menuItems[menuNumber][menuEntry];
+  menu oldMenuItem = menuItems[menuNumber][oldMenuEntry];
+  lcd.setCursor(oldMenuItem.x,oldMenuItem.y);
+  lcd.print(" ");
   lcd.setCursor(menuItem.x,menuItem.y);
   lcd.print("*");
+  oldMenuItem = menuItem;
 }
 

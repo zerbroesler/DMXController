@@ -33,12 +33,12 @@ void setup() {
   displaySetup();
   inputSetup();
   setMenu(0);
-  drawMenu();
   setMenuEntry(0);
-  updateMenu();
 }
 
 void loop() {
+  drawMenu();
+  updateMenuEntry();
   readKnobs();
   updateDisplay();
 }
