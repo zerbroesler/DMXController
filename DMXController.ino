@@ -5,11 +5,6 @@
 // Version for Arduino mega
 
 
-
-
-
-
-
 #define NumKnobs 4
 #define dmxChannel 4
 
@@ -32,13 +27,14 @@ void setup() {
   DmxSimple.write(dmxChannel,255);
   displaySetup();
   inputSetup();
-  setMenu(0);
+  setMenuNumber(0);
   setMenuEntry(0);
 }
 
 void loop() {
   readKnobs();
-
+  readMenuKnob();
+  updateMenuEntry();
   drawMenu();
   drawMenuEntry();
   updateDisplay();

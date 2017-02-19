@@ -12,7 +12,6 @@ LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars
 
 long knobValues[NumKnobs];
 void showKnobs();
-void showMenuEntry();
 char buf[3];
 
 void displaySetup() {

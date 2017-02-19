@@ -47,8 +47,7 @@ void readKnobs(){
   }
 }
 
-void NavigateMenu(){
-  // Navigates through menu according to the menu encoder
+void readMenuKnob(){
   news[MENUKNOB] = knob3.read();
   if (news[MENUKNOB] != olds[MENUKNOB] ){
       pressed = !digitalRead(pushpin[MENUKNOB]);
