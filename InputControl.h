@@ -57,10 +57,6 @@ void readMenuKnob(){
   setMenuPressed(pressed);
 }
 
-//      showValue((int)positions[knob],knob*7+1);
-//      // Save values
-//      DmxSimple.write(dmxChannel+knob+1,(int)positions[knob]);
-
 
 float calculateValue(float value,long difference,boolean press){
   if(press == false){

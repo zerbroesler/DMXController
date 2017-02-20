@@ -65,7 +65,7 @@ void showKnobs(){
       if(getKnobChanged(knob)){
         knobValue = getKnobValueLog(knob);
         showValue(knobValue,knob*7+1,3);
-        DmxSimple.write(dmxChannel+knob+1,knobValue);
+        setDmxColor(knob,knobValue);
       }
 //      olds[knob] = news[knob];
 //      // Save values

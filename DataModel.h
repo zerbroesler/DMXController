@@ -4,11 +4,15 @@ long menuRelative = 0;
 boolean knobChanged[NumKnobs];
 boolean menuPressed = false;
 boolean menuReleased = false;
+//byte dmxValues[][10];
+int lampCount=2;
+int lampNumber=0;
 
 long getKnobValue(int knobNumber){
   knobChanged[knobNumber]=false;
   return knobs[knobNumber];
 }
+
 boolean getKnobChanged(int knobNumber){
   return knobChanged[knobNumber];
 }
@@ -35,12 +39,15 @@ void setKnobValue(int knobNumber,long value,long relative,boolean pressed){
   knobs[knobNumber] = value;
   knobChanged[knobNumber]=true;
 }
+
 void setMenuValue(long relative){
   menuRelative+=relative;
 }
+
 long getMenuRelative(){
   return menuRelative;
 }
+
 void setMenuPressed(bool pressed){
   // Only set pressed when the button was released
   // between two calles of setMenuPressed
@@ -59,4 +66,25 @@ bool getMenuPressed(){
   menuPressed = false;
   return wasPressed;
 }
+
+void setLampCount(int count){
+  lampCount = count;
+}
+int getLampCount(){
+  return lampCount;
+}
+
+void setLamp(int number){
+  lampNumber = number;
+}
+int getLamp(){
+  return lampNumber;  
+}
+
+//void setDmxValue(int channel, int value){
+//  dmxValues[lampNumber][channel] = value;  
+//}
+//void getDmxValue(int channel){
+//  return dmxValues[lampNumber][channel];
+//}
 

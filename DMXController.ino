@@ -6,25 +6,21 @@
 
 
 #define NumKnobs 4
-#define dmxChannel 4
 
-#include <DmxSimple.h>
 // Project includes
 #include "DataModel.h"
+#include "DmxOut.h"
 #include "Display.h"
 #include "Menu.h"
 #include "InputControl.h"
 
-#define dmxPin 22
 
 
 float positions[NumKnobs];
 int menuentry = 0;
 
 void setup() {
-  DmxSimple.usePin(dmxPin);
-  DmxSimple.maxChannel(4);
-  DmxSimple.write(dmxChannel,255);
+  dmxSetup();
   displaySetup();
   inputSetup();
   setMenuNumber(0);
@@ -38,6 +34,7 @@ void loop() {
   drawMenu();
   drawMenuEntry();
   updateDisplay();
+//  dmxWrite();
 }
 
 
