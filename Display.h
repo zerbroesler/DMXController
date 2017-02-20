@@ -21,12 +21,6 @@ void displaySetup() {
   lcd.backlight();
   lcd.setCursor(1,2);
   lcd.print("Red   Green  Blue");
-
-
-//  for(int knob = 0;knob<NumKnobs;knob++){
-//    olds[knob]=1;
-  //}
-
 }
 
 int  slowdisplay = DISPLAYSPEED;
@@ -61,15 +55,11 @@ void showKnobs(){
 
   int knobValue;
   for(int knob = 0;knob<VALUEKNOBS;knob++){
-//     positions[knob] = calculateValue(positions[knob],news[knob]-olds[knob],pressed);
       if(getKnobChanged(knob)){
         knobValue = getKnobValueLog(knob);
         showValue(knobValue,knob*7+1,3);
         setDmxColor(knob,knobValue);
       }
-//      olds[knob] = news[knob];
-//      // Save values
-//    }
   }
 }
 
