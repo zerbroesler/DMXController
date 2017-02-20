@@ -7,8 +7,7 @@
 
 #include <DmxSimple.h>
 
-byte colors[][3]={{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
-int col[3]={1,1,1};
+byte colors[][3]={{1,0,0},{0,0,0},{0,0,0},{0,0,0}};
 
 void dmxSetup(){
   DmxSimple.usePin(dmxPin);
@@ -33,8 +32,8 @@ void setDmxValue(int channel, int value){
 
 void setDmxColor(int knob,byte value){
   int lamp = getLamp();
-  col[knob]=(byte)value;
-  if(lamp==0){
+  colors[lamp][knob]=value;
+  if(getLamp()==0){
     int dmxStart=lamp*dmxSize;
     DmxSimple.write(dmxStart+1,0);
     DmxSimple.write(dmxStart+2,0);
@@ -42,28 +41,14 @@ void setDmxColor(int knob,byte value){
     DmxSimple.write(dmxStart+4,255);   // Master Dim
     DmxSimple.write(dmxStart+knob+5,value);
     // Calculate white
-    int g  = col[1];
-    int b  = col[2];
-    int r  = col[0];
-    if(knob==0){
-    DmxSimple.write(dmxStart+8,200);
-    }
-    DmxSimple.write(dmxStart+5,r);
-    DmxSimple.write(dmxStart+6,g);
-    DmxSimple.write(dmxStart+7,b);
-
-//    int m = (r<g)?r:g;//min(r,g);
-//    int m = min(r,g);
-//    int w = min(b,m);
-
-//    byte w = b;//min(r,b);
-//    int m;
-//    if((int)r<(int)g){
-//      m=0;
-//    }else{
-//      m=100;
-//    }
-//    DmxSimple.write(dmxStart+8,w);   // White
+    byte r  = colors[lamp][0];
+    byte g  = colors[lamp][1];
+    byte b  = colors[lamp][2];
+    int w = min((int)b,min((int)r,(int)g));
+    DmxSimple.write(dmxStart+8,w);   // White
+    DmxSimple.write(dmxStart+5,r-w/2);
+    DmxSimple.write(dmxStart+6,g-w/2);
+    DmxSimple.write(dmxStart+7,b-w/2);
   }
   if(getLamp()==0){
     int dmxStart=getLamp()+1*dmxSize;
