@@ -40,7 +40,7 @@ menuProperty menuProperties[] = {
     {14,1,4,  0}}, // Prog
 //
 //"12345678901234567890",
-  "   Lamp selection   ",
+  " < Lamp selection   ",
   " 1 2 3 4 5 6 7 8 <- ",
   "          ",
   2, 9, {
@@ -55,7 +55,7 @@ menuProperty menuProperties[] = {
     {16,1,2,  1}},
 //
 //"12345678901234567890",
-  "   Color chooser    ",
+  " <  Color chooser   ",
   " 1 2 3 4 5 6 7 8 <- ",
   "          ",
   3, 9, {

@@ -1,12 +1,24 @@
 long knobs[NumKnobs];
-long knobsRelative[NumKnobs];
 long menuRelative = 0;
-boolean knobChanged[NumKnobs];
+boolean knobChanged[NumKnobs]={true,true,true};
 boolean menuPressed = false;
 boolean menuReleased = false;
 //byte dmxValues[][10];
 int lampCount=2;
 int lampNumber=0;
+
+struct LampData{
+	bool active;     // On or off
+	int  dmxAddress; //
+	int  dmxType;
+};
+LampData lampsData[] = {
+  // Temporary until ui config exists
+	{true,1,0},
+	{true,11,0},
+	{false,21,0},
+};
+
 
 long getKnobValue(int knobNumber){
   knobChanged[knobNumber]=false;
@@ -22,18 +34,15 @@ int getKnobValueLog(int knobNumber){
   return (int)(knobs[knobNumber]*knobs[knobNumber]/255);
 }
 
-void setKnobValue(int knobNumber,long value,long relative,boolean pressed){
-  value -= knobsRelative[knobNumber];
+void setKnobValue(int knobNumber,int relative,boolean pressed){
+  int value = knobs[knobNumber]+relative;
   if(pressed==false){
     value += relative*2;
-    knobsRelative[knobNumber] -= relative*2;
   }
   if(value < 0){
-    knobsRelative[knobNumber] += value;
     value = 0;
   }
   if(value > 255){
-    knobsRelative[knobNumber] += value-256;
     value = 255;
   }
   knobs[knobNumber] = value;

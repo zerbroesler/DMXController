@@ -4,19 +4,12 @@
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
 
-LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
-
-#define DISPLAYSPEED 2000
-#define VALUEKNOBS 3
+LiquidCrystal_I2C lcd(0x27,20,4);
 
 
-long knobValues[NumKnobs];
 void showKnobs();
-char buf[3];
 
 void displaySetup() {
-//  Serial.begin(57600);
-//  Serial.println("Debug:");
   lcd.init();
   lcd.backlight();
   lcd.setCursor(1,2);
@@ -28,6 +21,7 @@ int  slowdisplay = DISPLAYSPEED;
 
 void showValue(long value,int xpos,int ypos){
 //  int mil = millis();
+  char buf[3];
   sprintf(buf,"%3u",value);
   lcd.setCursor(xpos,ypos);
   lcd.print(buf);
@@ -47,8 +41,6 @@ void updateDisplay(){
   }else{
     slowdisplay--;
   }
-//    knobLeft.write(0);
-//    knobRight.write(0);
 }
 
 void showKnobs(){
