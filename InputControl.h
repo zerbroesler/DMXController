@@ -29,6 +29,7 @@ void inputSetup(){
 }
 
 boolean pressed = false;
+// For relative
 long olds[NumKnobs];
 long news[NumKnobs];
 
@@ -41,7 +42,7 @@ void readKnobs(){
   for(int knob = 0;knob<VALUEKNOBS;knob++){
     if (news[knob] != olds[knob] ){
       pressed = !digitalRead(pushpin[knob]);
-      setKnobValue(knob,news[knob],news[knob]-olds[knob],pressed);
+      setKnobValue(knob,news[knob]-olds[knob],pressed);
       olds[knob] = news[knob];
     }
   }

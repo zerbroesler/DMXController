@@ -1,10 +1,3 @@
-
-
-
-#define dmxSize 10
-#define dmxPin 22
-
-
 #include <DmxSimple.h>
 
 byte colors[][3]={{1,0,0},{0,0,0},{0,0,0},{0,0,0}};

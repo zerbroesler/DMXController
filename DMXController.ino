@@ -5,9 +5,9 @@
 // Version for Arduino mega
 
 
-#define NumKnobs 4
 
 // Project includes
+#include "Config.h"
 #include "DataModel.h"
 #include "DmxOut.h"
 #include "Display.h"
@@ -16,10 +16,10 @@
 
 
 
-float positions[NumKnobs];
-int menuentry = 0;
-
 void setup() {
+  //  Serial.begin(57600);
+  //  Serial.println("Debug:");
+
   dmxSetup();
   displaySetup();
   inputSetup();
@@ -34,9 +34,5 @@ void loop() {
   drawMenu();
   drawMenuEntry();
   updateDisplay();
-//  dmxWrite();
+  // DMX is automatically updated via timer interrupt of DMXSimple library
 }
-
-
-
-
