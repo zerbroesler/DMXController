@@ -4,6 +4,7 @@
 // 
 // Version for Arduino mega
 
+#define debug
 
 
 // Project includes
@@ -17,8 +18,10 @@
 
 
 void setup() {
-  //  Serial.begin(57600);
-  //  Serial.println("Debug:");
+  #ifdef debug
+  Serial.begin(57600);
+  Serial.println("Debug started:");
+  #endif
 
   dmxSetup();
   displaySetup();

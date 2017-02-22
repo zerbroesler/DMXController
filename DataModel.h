@@ -49,7 +49,7 @@ void setKnobValue(int knobNumber,int relative,boolean pressed){
   knobChanged[knobNumber]=true;
 }
 
-void setMenuValue(long relative){
+void setMenuRelative(long relative){
   menuRelative+=relative;
 }
 
