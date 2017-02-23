@@ -12,7 +12,9 @@
 #include "DataModel.h"
 #include "DmxOut.h"
 #include "Display.h"
+#include "MenuEntries.h"
 #include "Menu.h"
+#include "MenuDMXTester.h"
 #include "InputControl.h"
 
 
