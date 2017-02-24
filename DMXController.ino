@@ -36,10 +36,10 @@ void setup() {
 
 void loop() {
   readKnobs();
+  updateKnobs();
   readMenuKnob();
   updateMenu();
   drawMenu();
   drawMenuEntry();
-  updateKnobs();
   // DMX is automatically updated via timer interrupt of DMXSimple library
 }

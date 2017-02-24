@@ -48,10 +48,11 @@ void showKnobs(){
   int knobValue;
   for(int knob = 0;knob<VALUEKNOBS;knob++){
       if(getKnobChanged(knob)){
+        setKnobChanged(knob,false);
         knobValue = getKnobValueLog(knob);
         // Todo: Move setDmxColor to test and make the showValue configurable
         showValue(knobValue,knob*7+1,3);
-        setDmxColor(knob,knobValue);
+//        setDmxColor(knob,knobValue);
       }
   }
 }

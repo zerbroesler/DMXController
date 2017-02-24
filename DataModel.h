@@ -21,8 +21,10 @@ LampData lampsData[] = {
 
 
 long getKnobValue(int knobNumber){
-  knobChanged[knobNumber]=false;
   return knobs[knobNumber];
+}
+void setKnobChanged(int knobNumber, boolean changed){
+  knobChanged[knobNumber]=false;
 }
 
 boolean getKnobChanged(int knobNumber){
