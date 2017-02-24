@@ -33,6 +33,9 @@ int getKnobValueLog(int knobNumber){
   knobChanged[knobNumber]=false;
   return (int)(knobs[knobNumber]*knobs[knobNumber]/255);
 }
+void setAbsoulteKnobValue(int knobNumber,int absolute){
+	knobs[knobNumber] = absolute;
+}
 
 void setKnobValue(int knobNumber,int relative,boolean pressed){
   int value = knobs[knobNumber]+relative;

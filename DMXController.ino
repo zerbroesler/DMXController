@@ -12,9 +12,11 @@
 #include "DataModel.h"
 #include "DmxOut.h"
 #include "Display.h"
+
 #include "MenuEntries.h"
 #include "Menu.h"
 #include "MenuDMXTester.h"
+
 #include "InputControl.h"
 
 
@@ -38,6 +40,6 @@ void loop() {
   updateMenu();
   drawMenu();
   drawMenuEntry();
-  updateDisplay();
+  updateKnobs();
   // DMX is automatically updated via timer interrupt of DMXSimple library
 }

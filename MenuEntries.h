@@ -62,7 +62,7 @@ menuProperty menuProperties[MENUENTRIES] = {
 //"12345678901234567890",
   " <   DMX Tester     ",
   " Addr:     Channels ",
-  "<                  >",
+  "                    ",
   4, 3, {
     {0,0,2,  1}, // Back
     {0,1,5, -1}, // Address selection
