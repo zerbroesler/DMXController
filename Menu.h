@@ -54,13 +54,13 @@ void showAround(int x,int y,int width,char start,char ending){
 }
 
 void showAngleBrackets(int x,int y,int width){
-  showAround(x,y,width,"<",">");
+  showAround(x,y,width,'<','>');
 }
 void showBrackets(int x,int y,int width){
-  showAround(x,y,width,"(",")");
+  showAround(x,y,width,'(',')');
 }
 void clearAround(int x,int y,int width){
-  showAround(x,y,width," "," ");
+  showAround(x,y,width,' ',' ');
 }
 
 void setMenuSpecial(int number){
@@ -114,7 +114,7 @@ void handleMenuSpecial(){
       menuSpecialDmxAddress();
       break;
     case 2:
-//      menuSpecialDmxChannel();
+      menuSpecialDmxChannel();
       break;
     default:
     // Just ignore?

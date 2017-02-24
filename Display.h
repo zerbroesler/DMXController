@@ -19,9 +19,9 @@ void displaySetup() {
 int  slowdisplay = DISPLAYSPEED;
 
 
-void showValue(long value,int xpos,int ypos){
+void showValue(int value,int xpos,int ypos){
 //  int mil = millis();
-  char buf[3];
+  char buf[4];
   sprintf(buf,"%3u",value);
   lcd.setCursor(xpos,ypos);
   lcd.print(buf);

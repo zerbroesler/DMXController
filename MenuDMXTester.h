@@ -18,9 +18,8 @@ void previousDmxAddress(){
   dmxAddress=(dmxAddress+128)%128;
 }
 void menuSpecialDmxAddressInit(){
-  // Angle brackets around the knob values to indicate that they can be shifted
-  clearAround(10,1,8);
-  showAngleBrackets(0,2,18);
+  clearAround(0,1,5);
+  showBrackets(6,1,3);
 }
 void menuSpecialDmxAddress(){
   int relativeStep = getRelativeMenuStep();
@@ -38,10 +37,10 @@ void menuSpecialDmxAddress(){
   }
 }
 
-
 void menuSpecialDmxChannelInit(){
-  clearAround(0,1,5);
-  showBrackets(6,1,3);
+  // Angle brackets around the knob values to indicate that they can be shifted
+  clearAround(10,1,8);
+  showAngleBrackets(0,2,18);
 }
 
 void showDmxChannels(){
