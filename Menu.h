@@ -8,6 +8,8 @@
 void handleMenuSpecial();
 void menuSpecialDmxAddress();
 void menuSpecialDmxChannel();
+void menuSpecialDmxAddressInit();
+void menuSpecialDmxChannelInit();
 
 int menuSpecial = 0;
 int menuNumber = 0;
@@ -43,17 +45,22 @@ void previousMenuEntry(){
     menuEntry=getMenuProperty().menuLength-1;
   }
 }
-void showBrackets(int x,int y,int width){
+
+void showAround(int x,int y,int width,char start,char ending){
   lcd.setCursor(x,y);
-  lcd.print("(");
+  lcd.print(start);
   lcd.setCursor(x+width+1,y);
-  lcd.print(")");
+  lcd.print(ending);
 }
-void clearBrackets(int x,int y,int width){
-  lcd.setCursor(x,y);
-  lcd.print(" ");
-  lcd.setCursor(x+width+1,y);
-  lcd.print(" ");
+
+void showAngleBrackets(int x,int y,int width){
+  showAround(x,y,width,"<",">");
+}
+void showBrackets(int x,int y,int width){
+  showAround(x,y,width,"(",")");
+}
+void clearAround(int x,int y,int width){
+  showAround(x,y,width," "," ");
 }
 
 void setMenuSpecial(int number){
@@ -61,8 +68,10 @@ void setMenuSpecial(int number){
   // Specific setup (mainly optical)
   switch(menuSpecial){
     case 1:
-      clearBrackets(0,1,5);
-      showBrackets(6,1,3);
+      menuSpecialDmxAddressInit();
+      break;
+    case 2:
+      menuSpecialDmxChannelInit();
       break;
     default:
       break;
@@ -116,17 +125,28 @@ void handleMenuSpecial(){
   }
 }
 
+int getRelativeMenuStep(){
+  int relative = 0;
+  long menuRelative = getMenuRelative();
+  if(menuRelative>=4){
+    setMenuRelative(-4);
+    relative=1;
+  }
+  if(menuRelative <=-4){
+    setMenuRelative(4);
+    relative=-1;
+  }
+  return relative;
+}
+
 void updateMenu(){
   if(getMenuSpecial()!=0){
     handleMenuSpecial();
   }
-  long menuRelative = getMenuRelative();
-  if(menuRelative>=4){
-    setMenuRelative(-4);
+  int relativeStep = getRelativeMenuStep();
+  if(relativeStep==1){
     nextMenuEntry();
-  }
-  if(menuRelative <=-4){
-    setMenuRelative(4);
+  }else if(relativeStep==-1){
     previousMenuEntry();
   }
   if(getMenuPressed()==true){
@@ -156,7 +176,7 @@ void drawMenuEntry(){
   menuProperty menu = getMenuProperty();
   menuItem newMenuItem = menu.menuItems[menuEntry];
   menuItem oldMenuItem = menu.menuItems[oldMenuEntry];
-  clearBrackets(oldMenuItem.x,oldMenuItem.y,oldMenuItem.width);
+  clearAround(oldMenuItem.x,oldMenuItem.y,oldMenuItem.width);
   showBrackets(newMenuItem.x,newMenuItem.y,newMenuItem.width);
 
   oldMenuEntry = menuEntry;
