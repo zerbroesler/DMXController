@@ -42,10 +42,6 @@ void readKnobs(){
   for(int knob = 0;knob<VALUEKNOBS;knob++){
     if (news[knob] != olds[knob] ){
       pressed = !digitalRead(pushpin[knob]);
-  Serial.print("news "); 
-  Serial.println(news[knob]);
-  Serial.println(olds[knob]);
-      
       setKnobValue(knob,news[knob]-olds[knob],pressed);
       olds[knob] = news[knob];
     }

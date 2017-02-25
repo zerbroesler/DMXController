@@ -1,4 +1,4 @@
-int knobs[NUMKNOBS]={10,20,30,40};
+int knobs[NUMKNOBS]={0,0,0,0};
 int knobsRelative[NUMKNOBS]={0,0,0,0};
 long menuRelative = 0;
 boolean knobChanged[NUMKNOBS]={true,true,true,true};
@@ -7,6 +7,7 @@ boolean menuReleased = false;
 //byte dmxValues[][10];
 int lampCount=2;
 int lampNumber=0;
+int knobMode=0;
 
 struct LampData{
 	bool active;     // On or off
@@ -19,7 +20,15 @@ LampData lampsData[] = {
 	{true,11,0},
 	{false,21,0},
 };
-
+void setKnobsLinear(){
+  knobMode = 1;
+}
+void setKnobsLogarithmic(){
+  knobMode = 0;
+}
+int getKnobMode(){
+  return knobMode;
+}
 
 long getKnobValue(int knobNumber){
   return knobs[knobNumber];

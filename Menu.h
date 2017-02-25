@@ -13,6 +13,7 @@ void menuSpecialDmxChannelInit();
 
 int menuSpecial = 0;
 int menuNumber = 0;
+int menuId = 0;
 int menuEntry = 0;
 int oldMenuNumber = -1;
 int oldMenuEntry = 1;
@@ -27,6 +28,14 @@ struct menuProperty getMenuProperty(){
 void setMenuNumber(int number){
   menuNumber = number;
   menuSpecial = 0;  // Special have to end since the menu changed
+  switch(menuId){
+    case 4:    // Test menu
+      setKnobsLinear();
+      break;
+    default:
+      setKnobsLogarithmic();
+      break;
+  }
 }
 
 void setMenuEntry(int number){
@@ -83,6 +92,7 @@ int getMenuSpecial(){
 
 void jumpToMenu(int to){
   byte index = 0;
+  menuId=to;
   for(int i=0;i<MENUENTRIES;i++){
     if(menuProperties[i].id==to){
       index = i;
