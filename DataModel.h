@@ -1,6 +1,7 @@
-long knobs[NumKnobs];
+int knobs[NUMKNOBS]={10,20,30,40};
+int knobsRelative[NUMKNOBS]={0,0,0,0};
 long menuRelative = 0;
-boolean knobChanged[NumKnobs]={true,true,true};
+boolean knobChanged[NUMKNOBS]={true,true,true,true};
 boolean menuPressed = false;
 boolean menuReleased = false;
 //byte dmxValues[][10];
@@ -32,17 +33,37 @@ boolean getKnobChanged(int knobNumber){
 }
 
 int getKnobValueLog(int knobNumber){
+  long knobValue=knobs[knobNumber];
   knobChanged[knobNumber]=false;
-  return (int)(knobs[knobNumber]*knobs[knobNumber]/255);
+  return (int)(knobValue*knobValue/255L);
 }
 void setAbsoulteKnobValue(int knobNumber,int absolute){
 	knobs[knobNumber] = absolute;
 }
 
-void setKnobValue(int knobNumber,int relative,boolean pressed){
-  int value = knobs[knobNumber]+relative;
+int getRelativeForKnob(int knobNumber,long difference){
+  int relative = 0;
+//  Serial.println(difference);
+  int knobRelative = knobsRelative[knobNumber]+difference;
+  if(knobRelative>= 4){
+    knobRelative -= 4;
+    relative=1;
+  }
+  if(knobRelative <= -4){
+    knobRelative += 4;
+    relative=-1;
+  }
+  knobsRelative[knobNumber]=knobRelative;
+  return relative;
+}
+
+void setKnobValue(int knobNumber,long difference,boolean pressed){
+  int relative = getRelativeForKnob(knobNumber,difference);
+  int value = knobs[knobNumber];
   if(pressed==false){
-    value += relative*2;
+    value += ( relative*5 );
+  }else{
+    value += relative;
   }
   if(value < 0){
     value = 0;

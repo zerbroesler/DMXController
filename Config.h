@@ -2,7 +2,7 @@
 
 // UI
 #define DISPLAYSPEED 2000
-#define NumKnobs 4
+#define NUMKNOBS 4
 #define VALUEKNOBS 3
 
 // Data

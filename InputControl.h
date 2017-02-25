@@ -30,8 +30,8 @@ void inputSetup(){
 
 boolean pressed = false;
 // For relative
-long olds[NumKnobs];
-long news[NumKnobs];
+long olds[NUMKNOBS];
+long news[NUMKNOBS];
 
 
 void readKnobs(){
@@ -42,6 +42,10 @@ void readKnobs(){
   for(int knob = 0;knob<VALUEKNOBS;knob++){
     if (news[knob] != olds[knob] ){
       pressed = !digitalRead(pushpin[knob]);
+  Serial.print("news "); 
+  Serial.println(news[knob]);
+  Serial.println(olds[knob]);
+      
       setKnobValue(knob,news[knob]-olds[knob],pressed);
       olds[knob] = news[knob];
     }
@@ -52,7 +56,7 @@ void readMenuKnob(){
   news[MENUKNOB] = knob3.read();
 
   if (news[MENUKNOB] != olds[MENUKNOB] ){
-      setMenuRelative(news[MENUKNOB]-olds[MENUKNOB]);
+      setMenuRelative(news[MENUKNOB]-olds[MENUKNOB]); 
       olds[MENUKNOB] = news[MENUKNOB];
   }
   pressed = !digitalRead(pushpin[MENUKNOB]);
