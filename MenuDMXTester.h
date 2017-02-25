@@ -32,6 +32,15 @@ void previousDmxAddress(){
   dmxAddress--;
   dmxAddress=(dmxAddress+128)%128;
 }
+void showDmxAdress(){
+  showValue(dmxAddress+1,7,1);
+}
+
+void menuDmxTesterInit(){
+  showDmxAdress();
+  showDmxChannels();
+  showDmxValues();
+}
 void menuSpecialDmxAddressInit(){
   clearAround(0,1,5);
   showBrackets(6,1,3);
@@ -45,7 +54,7 @@ void menuSpecialDmxAddress(){
   }else if(relativeStep==-1){
     previousDmxAddress();
   }
-  showValue(dmxAddress,7,1);
+  showDmxAdress();
 
   if(getMenuPressed()==true){
     clearAround(6,1,3);

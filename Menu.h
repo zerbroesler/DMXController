@@ -10,6 +10,7 @@ void menuSpecialDmxAddress();
 void menuSpecialDmxChannel();
 void menuSpecialDmxAddressInit();
 void menuSpecialDmxChannelInit();
+void menuDmxTesterInit();
 
 int menuSpecial = 0;
 int menuNumber = 0;
@@ -175,6 +176,14 @@ void drawMenu(){
   lcd.print(menu.menuText.text[1]);
   lcd.setCursor(0,2);
   lcd.print(menu.menuText.text[2]);
+  switch(menuId){
+    case 4:    // Test menu
+      menuDmxTesterInit();
+      break;
+    default:
+      break;
+  }
+
   oldMenuNumber=menuNumber;
 }
 
