@@ -1,0 +1,13 @@
+Todo:
+
+
+- Program logic with predefined program
+
+
+
+- Program menu to define a program
+
+- Persistency to flash memory
+
+- Blackout function
+
