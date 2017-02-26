@@ -22,9 +22,21 @@ The 4th row of the display is usually used to show the values of the three rotar
 
 ### Main Menu
 The main menu leds to the other menus
+* Run
 * Program
 * Lamps
 * Test
+* Sequences (of programs)
+Screen:
+```
+   DMX Controller   
+(Run *)   Program 
+ Lamps    Test
+   1         10
+```
+
+### Run
+Just runs the program. It has no UI, so it runs even when the user does something different in the ui. The speed and the program number can be adjusted in the main menu with knobs 1 and 2. Knob 3 is currently not assigned.
 
 ### Program
 Used to program a self-running show. Several programms can be defined, but currently only one is executed at a time. It may be possible to assign different programs to different lamps and run them simultaneously, but this is currently not possible.
@@ -51,3 +63,21 @@ A list of colors which are used together with the timings in %. There are predef
 #### total speed
 Total speed for one 100% cycle in seconds
 
+### Lamps
+Assign lamps to lamp groups and edit their sequence. The same sequence number... (not possible, or meaningful?)
+```
+Group: 1
+ 1 2 3 4 5 6 7 8
+ 1   2   3
+```
+
+### Test
+Test the DMXdevices connected.
+The start address can be selected via "Addr:". When "Channels" is selected, the channels relative to the start address can be scrolled through with the menu knob. The three knobs change the according channel shown in the ui. They have a step of 5 and a step of 1 when they are pressed.
+
+```
+ <   DMX Tester     
+ Addr:  1  Channels                     
+< 1       2      3 >
+  0      35    220
+```
