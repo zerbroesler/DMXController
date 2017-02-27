@@ -58,22 +58,22 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       255,0,0,  //values
       true,     // RGB
       1500,      // keep before transistion
-      3000,     // duration
+      2000,     // duration
       1,        // lamp schema
       fadeRGB,  // fade
       false,     // phase through
     
-      0,0,255,
+      0,255,255,
       true,   
-      0,   
-      2000,
+      1000,   
+      1000,
       1,      
       fadeRGB,
       false,
 
-      0,255,255,
+      0,0,255,
       true,   
-      2000,
+      1000,
       1000,
       1,      
       fadeRGB,

@@ -37,6 +37,10 @@ void setDmxColor(int colorNumber,byte value){
     byte r  = colors[lamp][0];
     byte g  = colors[lamp][1];
     byte b  = colors[lamp][2];
+    // Exponential color gradient as gamma correction
+    r=(int)r*(int)r/255L;
+    g=(int)g*(int)g/255L;
+    b=(int)b*(int)b/255L;
     int w = min((int)b,min((int)r,(int)g));
     DmxSimple.write(dmxStart+8,w);   // White
     DmxSimple.write(dmxStart+5,r-w/2);
