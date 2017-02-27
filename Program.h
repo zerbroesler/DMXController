@@ -29,6 +29,7 @@ struct values{
 struct programStep{
   struct values values;
   boolean colorType; // true=RGB,false=HSV
+  unsigned int keepInMilliseconds;
   unsigned int durationInMilliseconds;
   byte lampSchema;
   enum transistion transistion;
@@ -36,35 +37,47 @@ struct programStep{
 };
 
 struct program{
-//  int id;
+  byte numberOfSteps;
   struct programStep steps[MAX_PROGRAM_STEPS];
 };
 
 struct programState{
   unsigned long stepStartMilliseconds;
+  boolean keep;
   int currentStep;
 };
 
 struct programState programStates[MAX_PROGRAMS]={
-  {0,0},
-  {0,0}
+  {0,true,0},
+  {0,true,0}
 };
 
 struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Blue 2&1 Second
     {
+      3,
       255,0,0,  //values
       true,     // RGB
-      5000,     // duration
+      1500,      // keep before transistion
+      3000,     // duration
       1,        // lamp schema
       fadeRGB,  // fade
       false,     // phase through
     
-      0,100,255,  //values
-      true,     // RGB
-      1000,     // duration
-      1,        // lamp schema
-      fadeRGB,  // fade
-      false     // phase through
+      0,0,255,
+      true,   
+      0,   
+      2000,
+      1,      
+      fadeRGB,
+      false,
+
+      0,255,255,
+      true,   
+      2000,
+      1000,
+      1,      
+      fadeRGB,
+      false,
     }
 };
 
@@ -82,6 +95,7 @@ void startProgram(){
   int number = 0;
 //  checkProgramRunning(number);
   programStates[number].stepStartMilliseconds=millis();
+  programStates[number].keep=true;
   programStates[number].currentStep=0;
   // Error: Conflict with running program
   programRunning=true;
@@ -99,21 +113,40 @@ byte mixColor(int color1, int color2,int percent){
   return (byte)mixed;
 };
 
+byte nextStep(int programNumber, int programStep){
+  byte nextProgramStep=programStep+1;
+  if(nextProgramStep == programs[programNumber].numberOfSteps){
+    nextProgramStep = 0;
+  }
+  return nextProgramStep;
+}
+
 void programExecutor(){
   if(programRunning==false){
     return;
   }
   int programNumber = 0;
-  int programStep = 0;
+  int programStep = programStates[programNumber].currentStep;
 
+  byte nextStepNumber=nextStep(programNumber,programStep);
   struct programStep thisStep = programs[programNumber].steps[programStep];
-  struct programStep nextStep = programs[programNumber].steps[programStep+1];
+  struct programStep nextStep = programs[programNumber].steps[nextStepNumber];
+  struct programState state = programStates[programNumber];
   
 // Just execute program 1
-  unsigned long interval = millis()-programStates[programNumber].stepStartMilliseconds;
+  unsigned long interval = millis()-state.stepStartMilliseconds;
   unsigned int duration = thisStep.durationInMilliseconds;
-  if(interval>duration){
-    programStates[programNumber].stepStartMilliseconds=millis();
+  if(state.keep==true){
+    if(interval>thisStep.keepInMilliseconds){
+      programStates[programNumber].stepStartMilliseconds=millis();
+      programStates[programNumber].keep=false;
+    }
+  }else{
+    if(interval>duration){
+      programStates[programNumber].stepStartMilliseconds=millis();
+      programStates[programNumber].currentStep = nextStepNumber;
+      programStates[programNumber].keep=true;
+    }
   }
 
   // Calculate the color
@@ -125,7 +158,13 @@ void programExecutor(){
   int g2 = nextStep.values.g;
   int b2 = nextStep.values.b;
 
-  byte percent = (long)interval*100L/duration;
+
+  byte percent;
+  if(state.keep==true){
+    percent = 0;
+  }else{
+    percent = (long)interval*100L/duration;
+  }
   byte r = mixColor(r1,r2,percent);
   byte g = mixColor(g1,g2,percent);
   byte b = mixColor(b1,b2,percent);
