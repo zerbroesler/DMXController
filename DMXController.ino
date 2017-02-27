@@ -13,6 +13,8 @@
 #include "DmxOut.h"
 #include "Display.h"
 
+#include "Program.h"
+
 #include "MenuEntries.h"
 #include "Menu.h"
 #include "MenuDMXTester.h"
