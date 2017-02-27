@@ -32,9 +32,11 @@ void setMenuNumber(int number){
   switch(menuId){
     case 4:    // Test menu
       setKnobsLinear();
+      stopProgram();
       break;
     default:
       setKnobsLogarithmic();
+      startProgram();
       break;
   }
 }
