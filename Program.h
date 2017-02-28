@@ -106,6 +106,7 @@ byte nextStep(int programNumber, int programStep){
 }
 
 void programExecutor(){
+  // Todo: Spagetthi coding
   if(programRunning==false){
     return;
   }
@@ -160,7 +161,16 @@ void programExecutor(){
       colorMixed = colorFrom;
     break;
   };
-
-  setDmxColor(0,colorMixed);
+  // Todo: How is the lamp shema stored within the program?
+  LampSchema lampSchema = getLampSchema(0);
+  for(byte i = 0;i<MAX_LAMPS;i++){
+    byte lampNumber=lampSchema.sequence[i];
+    if(lampNumber>0){
+      LampData lampData = getLampData(lampNumber);
+      if(lampData.active==true){
+        setDmxColor(lampNumber,colorMixed);
+      }
+    }
+  }
 }
 
