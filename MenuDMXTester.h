@@ -77,9 +77,9 @@ void storeCurrentKnobs(){
 }
 void updateDmxValues(){
   int start = dmxAddress+dmxChannel;
-  setDmxValue(start,getKnobValue(0));
-  setDmxValue(start+1,getKnobValue(1));
-  setDmxValue(start+2,getKnobValue(2));
+  setDmxValue(start+1,getKnobValue(0));
+  setDmxValue(start+2,getKnobValue(1));
+  setDmxValue(start+3,getKnobValue(2));
 }
 
 

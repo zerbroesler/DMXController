@@ -161,8 +161,6 @@ void programExecutor(){
     break;
   };
 
-  setDmxColor(0,colorMixed.r);
-  setDmxColor(1,colorMixed.g);
-  setDmxColor(2,colorMixed.b);
+  setDmxColor(0,colorMixed);
 }
 

@@ -11,6 +11,7 @@
 
 #include "Config.h"
 #include "Colors.h"
+#include "Lamps.h"
 #include "DataModel.h"
 #include "DmxOut.h"
 #include "Display.h"

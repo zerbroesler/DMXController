@@ -58,8 +58,6 @@ void showKnobs(){
             break;
         }
         showValue(knobValue,knob*7+1,3);
-
-//        setDmxColor(knob,knobValue);
       }
   }
 }

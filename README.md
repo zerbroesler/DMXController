@@ -54,8 +54,13 @@ A effect of this program which can be one of the following:
 * Fade RGB
 * Fade HSV
 * Switch (Blink)
-* Static (No change over time)
-* Cycle through the assigned light in the sequence they are defined (change sequence possible?=> in light setup)
+
+#### cycle
+Cycle through the assigned light in the sequence they are defined (change sequence possible?=> in light setup)
+* Time delay in ms
+* Over all lamps
+* 1/x th of whole sequence
+
 
 #### colors / timing
 A list of colors which are used together with the timings in %. There are predefined colors, but they can also be selected via the rgb/hsv knobs

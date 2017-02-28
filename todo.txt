@@ -3,6 +3,8 @@ Todo:
 
 - Lamp configuration
 
+- Send program to multiple lamps
+
 - Program menu to define a program
 
 - Persistency to flash memory

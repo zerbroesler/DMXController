@@ -4,22 +4,9 @@ long menuRelative = 0;
 boolean knobChanged[NUMKNOBS]={true,true,true,true};
 boolean menuPressed = false;
 boolean menuReleased = false;
-//byte dmxValues[][10];
-int lampCount=2;
-int lampNumber=0;
+
 int knobMode=0;
 
-struct LampData{
-	bool active;     // On or off
-	int  dmxAddress; //
-	int  dmxType;
-};
-LampData lampsData[] = {
-  // Temporary until ui config exists
-	{true,1,0},
-	{true,11,0},
-	{false,21,0},
-};
 void setKnobsLinear(){
   knobMode = 1;
 }
@@ -110,25 +97,4 @@ bool getMenuPressed(){
   menuPressed = false;
   return wasPressed;
 }
-
-void setLampCount(int count){
-  lampCount = count;
-}
-int getLampCount(){
-  return lampCount;
-}
-
-void setLamp(int number){
-  lampNumber = number;
-}
-int getLamp(){
-  return lampNumber;  
-}
-
-//void setDmxValue(int channel, int value){
-//  dmxValues[lampNumber][channel] = value;  
-//}
-//void getDmxValue(int channel){
-//  return dmxValues[lampNumber][channel];
-//}
 
