@@ -2,7 +2,7 @@
 // Lamp functions and definition
 //
 #define MAX_LAMP_SCHEMAS 5
-#define MAX_LAMPS 10
+#define MAX_LAMPS 8
 
 struct LampData{
 	bool active;     // On or off
@@ -13,7 +13,12 @@ struct LampData lampsData[MAX_LAMPS] = {
   // Temporary until ui config exists
 	{true,1,0},
 	{true,11,0},
-	{false,21,0},
+	{true,21,0},
+  {false,31,0},
+  {false,41,0},
+  {false,51,0},
+  {false,61,0},
+  {false,71,0},
 };
 
 // Shema is a list of lamps used in a program.
@@ -24,8 +29,8 @@ struct LampSchema{
 };
 
 struct LampSchema lampSchemas[MAX_LAMP_SCHEMAS] = {
-  {1,2,0,0,0,0,0,0,0,0},
-  {4,3,2,1,0,0,0,0,0,0},
+  {1,2,3,0,0,0,0,0},
+  {4,3,2,1,0,0,0,0},
 };
 
 int lampCount = sizeof(lampsData)/sizeof(lampsData[0]);

@@ -27,7 +27,7 @@ RgbColor HsvToRgb(HsvColor hsv)
     }
 
     // converting to 16 bit to prevent overflow
-    h = hsv.h;
+    h = hsv.h%256;
     s = hsv.s;
     v = hsv.v;
 
@@ -108,7 +108,7 @@ HsvColor RgbToHsv(RgbColor rgb)
 }
 
 byte mixValues(int color1, int color2,int percent){
-  int mixed = ((color1*(100-percent))+(color2*percent))/200;
+  int mixed = ((color1*(100-percent))+(color2*percent))/100;
   return (byte)mixed;
 };
 
@@ -125,7 +125,17 @@ RgbColor mixColorHSV(RgbColor color1,RgbColor color2,int percent){
   HsvColor hsv1 = RgbToHsv(color1);
   HsvColor hsv2 = RgbToHsv(color2);
   HsvColor hsvResult;
-  hsvResult.h = mixValues(hsv1.h,hsv2.h,percent);
+  int h1 = hsv1.h; // Need a bigger range
+  int h2 = hsv2.h; // since hue is circular, we also want to go in both directions
+
+//  if(h2-h1>127){
+//    h1+=256;
+//  }
+  if(h1-h2>127){
+    h2+=256;
+  }
+  
+  hsvResult.h = mixValues(h1,h2,percent);
   hsvResult.s = mixValues(hsv1.s,hsv2.s,percent);
   hsvResult.v = mixValues(hsv1.v,hsv2.v,percent);
   return HsvToRgb(hsvResult);
