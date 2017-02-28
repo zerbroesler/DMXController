@@ -2,6 +2,7 @@
 
 // UI
 #define DISPLAYSPEED 2000
+#define PROGRAMSPEED 10
 #define NUMKNOBS 4
 #define VALUEKNOBS 3
 

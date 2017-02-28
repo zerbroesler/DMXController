@@ -15,6 +15,7 @@
 #define FADE_CONSTANT 3
 
 boolean programRunning = true;
+int programSpeedStep=0;
 
 struct values{
   byte r;
@@ -110,6 +111,12 @@ void programExecutor(){
   if(programRunning==false){
     return;
   }
+  programSpeedStep++;
+  if(programSpeedStep<PROGRAMSPEED){
+    return;
+  }else{
+    programSpeedStep=0;
+  }
 
   byte percent;
   int programNumber = 0;
@@ -161,18 +168,18 @@ void programExecutor(){
       colorMixed = colorFrom;
       break;
   };
-  byte lampNumber=0;
-  setDmxColor(lampNumber,colorMixed);
+//  byte lampNumber=0;
+//  setDmxColor(lampNumber,colorMixed);
   // Todo: How is the lamp shema stored within the program?
-//  LampSchema lampSchema = getLampSchema(0);
-//  for(byte i = 0;i<MAX_LAMPS;i++){
-//    byte lampNumber=lampSchema.sequence[i];
-//    if(lampNumber>0){
-//      LampData lampData = getLampData(lampNumber);
-//      if(lampData.active==true){
-//        setDmxColor(lampNumber,colorMixed);
-//      }
-//    }
-//  }
+  LampSchema lampSchema = getLampSchema(0);
+  for(byte i = 0;i<MAX_LAMPS;i++){
+    byte lampNumber=lampSchema.sequence[i];
+    if(lampNumber>0){
+      LampData lampData = getLampData(lampNumber);
+      if(lampData.active==true){
+        setDmxColor(lampNumber,colorMixed);
+      }
+    }
+  }
 }
 

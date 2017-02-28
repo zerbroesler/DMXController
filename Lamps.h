@@ -39,7 +39,7 @@ int getLampCount(){
 }
 
 struct LampData getLampData(int lampNumber){
-  return lampsData[lampNumber];
+  return lampsData[lampNumber-1];
 };
 
 struct LampSchema getLampSchema(int lampSchemaNumber){
