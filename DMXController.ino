@@ -8,7 +8,9 @@
 
 
 // Project includes
+
 #include "Config.h"
+#include "Colors.h"
 #include "DataModel.h"
 #include "DmxOut.h"
 #include "Display.h"

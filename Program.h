@@ -10,11 +10,15 @@
 #define MAX_PROGRAMS 10
 #define MAX_PROGRAM_STEPS 10
 
+#define RGB 1
+#define HSV 2
+
+
 boolean programRunning = true;
 
 enum transistion{
-  fadeRGB,
-  fadeHSV,
+  FADE_RGB,
+  FADE_HSV,
   constant,
 };
 
@@ -54,30 +58,30 @@ struct programState programStates[MAX_PROGRAMS]={
 
 struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Blue 2&1 Second
     {
-      3,
+      3,        // Steps
       255,0,0,  //values
-      true,     // RGB
-      1500,      // keep before transistion
+      RGB,     // RGB
+      1500,     // keep duration before transistion
       2000,     // duration
       1,        // lamp schema
-      fadeRGB,  // fade
-      false,     // phase through
+      FADE_RGB,  // fade
+      0,        // phase delay
     
       0,255,255,
-      true,   
+      RGB,
       1000,   
       1000,
       1,      
-      fadeRGB,
-      false,
+      FADE_RGB,
+      0,
 
       0,0,255,
-      true,   
+      RGB,   
       1000,
       1000,
       1,      
-      fadeRGB,
-      false,
+      FADE_RGB,
+      0,
     }
 };
 
@@ -108,10 +112,21 @@ void stopAllPrograms(){
   
 };
 
-byte mixColor(int color1, int color2,int percent){
+byte mixValues(int color1, int color2,int percent){
   int mixed = ((color1*(100-percent))+(color2*percent))/200;
   return (byte)mixed;
 };
+
+RgbColor mixColorRGB(RgbColor color1,RgbColor color2,int percent){
+  byte r = mixValues(color1.r,color2.r,percent);
+  byte g = mixValues(color1.g,color2.g,percent);
+  byte b = mixValues(color1.b,color2.b,percent);
+}
+RgbColor mixColorHSV(RgbColor color1,RgbColor color2,int percent){
+  byte r = mixValues(color1.r,color2.r,percent);
+  byte g = mixValues(color1.g,color2.g,percent);
+  byte b = mixValues(color1.b,color2.b,percent);
+}
 
 byte nextStep(int programNumber, int programStep){
   byte nextProgramStep=programStep+1;
@@ -125,23 +140,26 @@ void programExecutor(){
   if(programRunning==false){
     return;
   }
+
+  byte percent;
   int programNumber = 0;
   int programStep = programStates[programNumber].currentStep;
 
   byte nextStepNumber=nextStep(programNumber,programStep);
   struct programStep thisStep = programs[programNumber].steps[programStep];
   struct programStep nextStep = programs[programNumber].steps[nextStepNumber];
-  struct programState state = programStates[programNumber];
   
 // Just execute program 1
-  unsigned long interval = millis()-state.stepStartMilliseconds;
+  unsigned long interval = millis()-programStates[programNumber].stepStartMilliseconds;
   unsigned int duration = thisStep.durationInMilliseconds;
-  if(state.keep==true){
+  if(programStates[programNumber].keep==true){
+    percent = 0;
     if(interval>thisStep.keepInMilliseconds){
       programStates[programNumber].stepStartMilliseconds=millis();
       programStates[programNumber].keep=false;
     }
   }else{
+    percent = (long)interval*100L/duration;
     if(interval>duration){
       programStates[programNumber].stepStartMilliseconds=millis();
       programStates[programNumber].currentStep = nextStepNumber;
@@ -150,28 +168,34 @@ void programExecutor(){
   }
 
   // Calculate the color
-  int r1 = thisStep.values.r;
-  int g1 = thisStep.values.g;
-  int b1 = thisStep.values.b;
+  RgbColor colorFrom;
+  RgbColor colorTo;
+  RgbColor colorMixed;
   
-  int r2 = nextStep.values.r;
-  int g2 = nextStep.values.g;
-  int b2 = nextStep.values.b;
+  colorFrom.r = thisStep.values.r;
+  colorFrom.g = thisStep.values.g;
+  colorFrom.b = thisStep.values.b;
+
+  colorTo.r = nextStep.values.r;
+  colorTo.g = nextStep.values.g;
+  colorTo.b = nextStep.values.b;
+  
+  switch(thisStep.transistion){
+    case FADE_RGB:
+      colorMixed = mixColorRGB(colorFrom,colorTo,percent);
+      break;
+    case FADE_HSV:
+      colorMixed = mixColorHSV(colorFrom,colorTo,percent);
+      break;
+    default:
+      colorMixed = colorFrom;
+    break;
+  };
 
 
-  byte percent;
-  if(state.keep==true){
-    percent = 0;
-  }else{
-    percent = (long)interval*100L/duration;
-  }
-  byte r = mixColor(r1,r2,percent);
-  byte g = mixColor(g1,g2,percent);
-  byte b = mixColor(b1,b2,percent);
-
-  setDmxColor(0,r);
-  setDmxColor(1,g);
-  setDmxColor(2,b);
+  setDmxColor(0,colorMixed.r);
+  setDmxColor(1,colorMixed.g);
+  setDmxColor(2,colorMixed.b);
 
 //  getRunningPrograms();
 
