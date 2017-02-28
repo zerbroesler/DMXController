@@ -17,19 +17,20 @@ void setDmxRGB(int dmxStart,RgbColor color){
     byte g  = color.g;
     byte b  = color.b;
     // Exponential color gradient as gamma correction
-    r=(int)r*(int)r/255L;
-    g=(int)g*(int)g/255L;
-    b=(int)b*(int)b/255L;
-    DmxSimple.write(dmxStart+1,r);
-    DmxSimple.write(dmxStart+2,g);
-    DmxSimple.write(dmxStart+3,b);
+//    r=(int)r*(int)r/255L;
+//    g=(int)g*(int)g/255L;
+//    b=(int)b*(int)b/255L;
+
+    DmxSimple.write(dmxStart+0,r);
+    DmxSimple.write(dmxStart+1,g);
+    DmxSimple.write(dmxStart+2,b);
 };
 
 void setDmxRGBW(int dmxStart,RgbColor color){
+    DmxSimple.write(dmxStart+0,0);
     DmxSimple.write(dmxStart+1,0);
     DmxSimple.write(dmxStart+2,0);
-    DmxSimple.write(dmxStart+3,255);
-    DmxSimple.write(dmxStart+4,255);   // Master Dim
+    DmxSimple.write(dmxStart+3,255);   // Master Dim
     // Calculate white
     byte r  = color.r;
     byte g  = color.g;
@@ -37,12 +38,12 @@ void setDmxRGBW(int dmxStart,RgbColor color){
     int w = min((int)b,min((int)r,(int)g));
     // Exponential color gradient as gamma correction
     w=(int)w*(int)w/255L;
-    DmxSimple.write(dmxStart+8,w);   // White
+    DmxSimple.write(dmxStart+7,w);   // White
     w/=2;
     RgbColor remainingColor;
     remainingColor.r = r-w;
-    remainingColor.g = r-g;
-    remainingColor.b = r-b;
+    remainingColor.g = g-w;
+    remainingColor.b = b-w;
     setDmxRGB(dmxStart+4,remainingColor);
 };
 

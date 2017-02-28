@@ -159,18 +159,20 @@ void programExecutor(){
       break;
     default:
       colorMixed = colorFrom;
-    break;
+      break;
   };
+  byte lampNumber=0;
+  setDmxColor(lampNumber,colorMixed);
   // Todo: How is the lamp shema stored within the program?
-  LampSchema lampSchema = getLampSchema(0);
-  for(byte i = 0;i<MAX_LAMPS;i++){
-    byte lampNumber=lampSchema.sequence[i];
-    if(lampNumber>0){
-      LampData lampData = getLampData(lampNumber);
-      if(lampData.active==true){
-        setDmxColor(lampNumber,colorMixed);
-      }
-    }
-  }
+//  LampSchema lampSchema = getLampSchema(0);
+//  for(byte i = 0;i<MAX_LAMPS;i++){
+//    byte lampNumber=lampSchema.sequence[i];
+//    if(lampNumber>0){
+//      LampData lampData = getLampData(lampNumber);
+//      if(lampData.active==true){
+//        setDmxColor(lampNumber,colorMixed);
+//      }
+//    }
+//  }
 }
 

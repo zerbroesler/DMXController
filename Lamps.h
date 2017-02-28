@@ -19,7 +19,7 @@ struct LampData lampsData[MAX_LAMPS] = {
 // Shema is a list of lamps used in a program.
 // It holds the lamp numbers and the sequence they are used.
 // 0=Not used, other = sequence number
-typedef struct LampSchema{
+struct LampSchema{
   int sequence[MAX_LAMPS];
 };
 
