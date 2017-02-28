@@ -1,26 +1,20 @@
 //
 // Light programs
 //
-
-// a program could be moving / color
-// or combined. lights with more than one possible color are not supported at the moment.
+// Lights with more than one possible color are not supported at the moment.
 //
 
-
-#define MAX_PROGRAMS 10
-#define MAX_PROGRAM_STEPS 10
+#define MAX_PROGRAMS 5
+#define MAX_PROGRAM_STEPS 8
 
 #define RGB 1
 #define HSV 2
 
+#define FADE_RGB 1
+#define FADE_HSV 2
+#define FADE_CONSTANT 3
 
 boolean programRunning = true;
-
-enum transistion{
-  FADE_RGB,
-  FADE_HSV,
-  constant,
-};
 
 struct values{
   byte r;
@@ -36,7 +30,7 @@ struct programStep{
   unsigned int keepInMilliseconds;
   unsigned int durationInMilliseconds;
   byte lampSchema;
-  enum transistion transistion;
+  byte transistion;
   boolean phaseTroughLamps; // starts the program for each lamp in lampSchema delayed by 1/lamps
 };
 
@@ -85,15 +79,9 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
     }
 };
 
-unsigned long oldTime;
-
-int getIntervalMS(){
-  return 100;
-};
 bool checkProgramRunning(int number){
   return false;
 };
-
 
 void startProgram(){
   int number = 0;
@@ -103,30 +91,11 @@ void startProgram(){
   programStates[number].currentStep=0;
   // Error: Conflict with running program
   programRunning=true;
-  
 };
+
 void stopProgram(){
   programRunning=false;
 };
-void stopAllPrograms(){
-  
-};
-
-byte mixValues(int color1, int color2,int percent){
-  int mixed = ((color1*(100-percent))+(color2*percent))/200;
-  return (byte)mixed;
-};
-
-RgbColor mixColorRGB(RgbColor color1,RgbColor color2,int percent){
-  byte r = mixValues(color1.r,color2.r,percent);
-  byte g = mixValues(color1.g,color2.g,percent);
-  byte b = mixValues(color1.b,color2.b,percent);
-}
-RgbColor mixColorHSV(RgbColor color1,RgbColor color2,int percent){
-  byte r = mixValues(color1.r,color2.r,percent);
-  byte g = mixValues(color1.g,color2.g,percent);
-  byte b = mixValues(color1.b,color2.b,percent);
-}
 
 byte nextStep(int programNumber, int programStep){
   byte nextProgramStep=programStep+1;
@@ -192,15 +161,8 @@ void programExecutor(){
     break;
   };
 
-
   setDmxColor(0,colorMixed.r);
   setDmxColor(1,colorMixed.g);
   setDmxColor(2,colorMixed.b);
-
-//  getRunningPrograms();
-
-//  for(){
-//    getValuesFromProgram()
-//  }
 }
 

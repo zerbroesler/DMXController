@@ -36,12 +36,12 @@ Screen:
 ```
 
 ### Run
-Just runs the program. It has no UI, so it runs even when the user does something different in the ui. The speed and the program number can be adjusted in the main menu with knobs 1 and 2. Knob 3 is currently not assigned.
+Just runs the program. It has no UI, so it runs even when the user does something different in the UI except of Test which stops the program. The speed and the program number can be adjusted in the main menu with knobs 1 and 2. Knob 3 is currently not assigned.
 
 ### Program
-Used to program a self-running show. Several programms can be defined, but currently only one is executed at a time. It may be possible to assign different programs to different lamps and run them simultaneously, but this is currently not possible.
+Used to program a self-running show. Several programs can be defined, but currently only one is executed at a time. It may be possible to assign different programs to different lamps and run them simultaneously, but this is currently not possible.
 
-A program consists of the following elements
+A program consists of the following elements:
 
 #### Number
 Number to store the program. To make it not too confusing and since memory is limited there are currently 5 Programs supported. They may be started / changed via physical buttons attached to pins 45, 47, 49, 51, 53 of the arduino mega.

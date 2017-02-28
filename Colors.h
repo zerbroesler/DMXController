@@ -106,3 +106,25 @@ HsvColor RgbToHsv(RgbColor rgb)
 
     return hsv;
 }
+
+byte mixValues(int color1, int color2,int percent){
+  int mixed = ((color1*(100-percent))+(color2*percent))/200;
+  return (byte)mixed;
+};
+
+RgbColor mixColorRGB(RgbColor color1,RgbColor color2,int percent){
+  byte r = mixValues(color1.r,color2.r,percent);
+  byte g = mixValues(color1.g,color2.g,percent);
+  byte b = mixValues(color1.b,color2.b,percent);
+};
+
+RgbColor mixColorHSV(RgbColor color1,RgbColor color2,int percent){
+  HsvColor hsv1 = RgbToHsv(color1);
+  HsvColor hsv2 = RgbToHsv(color2);
+  HsvColor hsvResult;
+  hsvResult.h = mixValues(hsv1.h,hsv2.h,percent);
+  hsvResult.s = mixValues(hsv1.s,hsv2.s,percent);
+  hsvResult.v = mixValues(hsv1.v,hsv2.v,percent);
+  return HsvToRgb(hsvResult);
+};
+

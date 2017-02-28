@@ -1,9 +1,7 @@
 Todo:
 
 
-- Program logic with predefined program
-
-
+- Lamp configuration
 
 - Program menu to define a program
 
