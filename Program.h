@@ -54,28 +54,28 @@ struct programState programStates[MAX_PROGRAMS]={
 struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Blue 2&1 Second
     {
       3,        // Steps
-      255,0,0,  //values
+      80,0,0,  //values
       RGB,     // RGB
-      1500,     // keep duration before transistion
-      2000,     // duration
+      5000,     // keep duration before transistion
+      4000,     // duration
       1,        // lamp schema
-      FADE_HSV,  // fade
+      FADE_RGB,  // fade
       0,        // phase delay
     
-      0,255,255,
+      0,0,80,
       RGB,
-      1000,   
-      1000,
+      5000,   
+      4000,
       1,      
       FADE_RGB,
       0,
 
-      0,0,255,
+      0,80,0,
       RGB,   
-      1000,
-      1000,
+      5000,
+      4000,
       1,      
-      FADE_HSV,
+      FADE_RGB,
       0,
     }
 };
@@ -106,16 +106,96 @@ byte nextStep(int programNumber, int programStep){
   return nextProgramStep;
 }
 
+boolean reduceCalls(){
+  programSpeedStep++;
+  if(programSpeedStep<PROGRAMSPEED){
+    return false;
+  }else{
+    programSpeedStep=0;
+    return true;
+  }
+}
+
+struct RgbColor mixColorsOfSteps(programStep *thisStep, programStep *nextStep,int percent){
+
+  RgbColor colorFrom;
+  RgbColor colorTo;
+  RgbColor colorMixed;
+  
+  colorFrom.r = thisStep->values.r;
+  colorFrom.g = thisStep->values.g;
+  colorFrom.b = thisStep->values.b;
+
+  colorTo.r = nextStep->values.r;
+  colorTo.g = nextStep->values.g;
+  colorTo.b = nextStep->values.b;
+  
+  switch(thisStep->transistion){
+    case FADE_RGB:
+      colorMixed = mixColorRGB(colorFrom,colorTo,percent);
+      break;
+    case FADE_HSV:
+      colorMixed = mixColorHSV(colorFrom,colorTo,percent);
+      break;
+    default:
+      colorMixed = colorFrom;
+      break;
+  };
+  return colorMixed;
+}
+
+//  byte percent;
+//  int programNumber = 0;
+//  int programStep = programStates[programNumber].currentStep;
+//
+//  byte nextStepNumber=nextStep(programNumber,programStep);
+//  struct programStep thisStep = programs[programNumber].steps[programStep];
+//  struct programStep nextStep = programs[programNumber].steps[nextStepNumber];
+//  
+//// Just execute program 1
+//  unsigned long interval = millis()-programStates[programNumber].stepStartMilliseconds;
+//  unsigned int duration = thisStep.durationInMilliseconds;
+//  if(programStates[programNumber].keep==true){
+//    percent = 0;
+//    if(interval>thisStep.keepInMilliseconds){
+//      programStates[programNumber].stepStartMilliseconds=millis();
+//      programStates[programNumber].keep=false;
+//    }
+//  }else{
+//    percent = (long)interval*100L/duration;
+//    if(interval>duration){
+//      programStates[programNumber].stepStartMilliseconds=millis();
+//      programStates[programNumber].currentStep = nextStepNumber;
+//      programStates[programNumber].keep=true;
+//    }
+//  }
+//
+////  byte lampNumber=0;
+////  setDmxColor(lampNumber,colorMixed);
+//  // Todo: How is the lamp shema stored within the program?
+//  LampSchema lampSchema = getLampSchema(0);
+//  for(byte i = 0;i<MAX_LAMPS;i++){
+//    byte lampNumber=lampSchema.sequence[i];
+//    if(lampNumber>0){
+//      LampData lampData = getLampData(lampNumber);
+//      if(lampData.active==true){
+//        setDmxColor(lampNumber,colorMixed);
+//      }
+//    }
+//  }
+//}
+
+void getProgramPosition(unsigned long milliseconds,unsigned long offset,programNumber){
+  // Calculate where we are...
+}
+
 void programExecutor(){
   // Todo: Spagetthi coding
   if(programRunning==false){
     return;
   }
-  programSpeedStep++;
-  if(programSpeedStep<PROGRAMSPEED){
+  if(reduceCalls()==true){
     return;
-  }else{
-    programSpeedStep=0;
   }
 
   byte percent;
@@ -144,32 +224,9 @@ void programExecutor(){
     }
   }
 
-  // Calculate the color
-  RgbColor colorFrom;
-  RgbColor colorTo;
-  RgbColor colorMixed;
-  
-  colorFrom.r = thisStep.values.r;
-  colorFrom.g = thisStep.values.g;
-  colorFrom.b = thisStep.values.b;
+  RgbColor colorMixed = mixColorsOfSteps(&thisStep,&nextStep,percent);
 
-  colorTo.r = nextStep.values.r;
-  colorTo.g = nextStep.values.g;
-  colorTo.b = nextStep.values.b;
-  
-  switch(thisStep.transistion){
-    case FADE_RGB:
-      colorMixed = mixColorRGB(colorFrom,colorTo,percent);
-      break;
-    case FADE_HSV:
-      colorMixed = mixColorHSV(colorFrom,colorTo,percent);
-      break;
-    default:
-      colorMixed = colorFrom;
-      break;
-  };
-//  byte lampNumber=0;
-//  setDmxColor(lampNumber,colorMixed);
+
   // Todo: How is the lamp shema stored within the program?
   LampSchema lampSchema = getLampSchema(0);
   for(byte i = 0;i<MAX_LAMPS;i++){
