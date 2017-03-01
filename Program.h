@@ -49,14 +49,11 @@ struct stepState{
 
 struct programState{
   unsigned long programDuration;
-  unsigned long stepStartMilliseconds;
-  boolean keep;
-  int currentStep;
 };
 
 struct programState programStates[MAX_PROGRAMS]={
-  {0,0,true,0},
-  {0,0,true,0}
+  {0},
+  {0},
 };
 
 struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Blue 2&1 Second
@@ -64,24 +61,24 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       3,        // Steps
       50,0,0,  //values
       RGB,     // RGB
-      5000,     // keep duration before transistion
-      4000,     // duration
+      2000,     // keep duration before transistion
+      2000,     // duration
       1,        // lamp schema
       FADE_RGB,  // fade
       0,        // phase delay
     
       0,0,80,
       RGB,
-      5000,   
-      4000,
+      2000,   
+      2000,
       1,      
       FADE_RGB,
       0,
 
       0,60,0,
       RGB,   
-      5000,
-      4000,
+      2000,
+      2000,
       1,      
       FADE_RGB,
       0,
@@ -119,9 +116,6 @@ void startProgram(){
   int number = 0;
   rememberAllProgramsDurations();
   globalProgramStart = millis();
-  programStates[number].stepStartMilliseconds=millis();
-  programStates[number].keep=true;
-  programStates[number].currentStep=0;
   // Error: Conflict with running program
   programRunning=true;
 };
@@ -176,47 +170,6 @@ struct RgbColor mixColorsOfSteps(programStep *thisStep, programStep *nextStep,in
   return colorMixed;
 }
 
-//  byte percent;
-//  int programNumber = 0;
-//  int programStep = programStates[programNumber].currentStep;
-//
-//  byte nextStepNumber=nextStep(programNumber,programStep);
-//  struct programStep thisStep = programs[programNumber].steps[programStep];
-//  struct programStep nextStep = programs[programNumber].steps[nextStepNumber];
-//  
-//// Just execute program 1
-//  unsigned long interval = millis()-programStates[programNumber].stepStartMilliseconds;
-//  unsigned int duration = thisStep.durationInMilliseconds;
-//  if(programStates[programNumber].keep==true){
-//    percent = 0;
-//    if(interval>thisStep.keepInMilliseconds){
-//      programStates[programNumber].stepStartMilliseconds=millis();
-//      programStates[programNumber].keep=false;
-//    }
-//  }else{
-//    percent = (long)interval*100L/duration;
-//    if(interval>duration){
-//      programStates[programNumber].stepStartMilliseconds=millis();
-//      programStates[programNumber].currentStep = nextStepNumber;
-//      programStates[programNumber].keep=true;
-//    }
-//  }
-//
-////  byte lampNumber=0;
-////  setDmxColor(lampNumber,colorMixed);
-//  // Todo: How is the lamp shema stored within the program?
-//  LampSchema lampSchema = getLampSchema(0);
-//  for(byte i = 0;i<MAX_LAMPS;i++){
-//    byte lampNumber=lampSchema.sequence[i];
-//    if(lampNumber>0){
-//      LampData lampData = getLampData(lampNumber);
-//      if(lampData.active==true){
-//        setDmxColor(lampNumber,colorMixed);
-//      }
-//    }
-//  }
-//}
-
 
 struct stepState findStepState(unsigned long milliseconds,unsigned long offset,byte programNumber){
   // Calculate where we are... 
@@ -230,14 +183,13 @@ struct stepState findStepState(unsigned long milliseconds,unsigned long offset,b
   unsigned long programDuration=0;
   for(int i=0;i<programs[programNumber].numberOfSteps;i++){
     currentStepState.stepNumber=i;
-    currentStepState.percent = (timeWithinProgram-programDuration)/(programs[programNumber].steps[i].keepInMilliseconds+1);//Avoid div/0
+    currentStepState.percent = 0;
     programDuration+=programs[programNumber].steps[i].keepInMilliseconds;
     if(timeWithinProgram < programDuration){
       currentStepState.keep=true;
       return currentStepState;
     }
-    currentStepState.percent = (timeWithinProgram-programDuration)/(programs[programNumber].steps[i].durationInMilliseconds+1);//Avoid div/0
-    currentStepState.percent = timeWithinProgram-programDuration;
+    currentStepState.percent = (byte)((timeWithinProgram-programDuration)*100/(programs[programNumber].steps[i].durationInMilliseconds+1));//Avoid div/0
     programDuration+=programs[programNumber].steps[i].durationInMilliseconds;    
     if(timeWithinProgram < programDuration){
       currentStepState.keep=false;
@@ -257,31 +209,15 @@ void programExecutor(){
 
   byte percent;
   int programNumber = 0;
-  int programStep = programStates[programNumber].currentStep;
+
+  struct stepState currentStepState = findStepState(millis(),0,0);
+  int programStep=currentStepState.stepNumber;
 
   byte nextStepNumber=nextStep(programNumber,programStep);
   struct programStep thisStep = programs[programNumber].steps[programStep];
   struct programStep nextStep = programs[programNumber].steps[nextStepNumber];
   
-// Just execute program 1
-  unsigned long interval = millis()-programStates[programNumber].stepStartMilliseconds;
-  unsigned int duration = thisStep.durationInMilliseconds;
-  if(programStates[programNumber].keep==true){
-    percent = 0;
-    if(interval>thisStep.keepInMilliseconds){
-      programStates[programNumber].stepStartMilliseconds=millis();
-      programStates[programNumber].keep=false;
-    }
-  }else{
-    percent = (long)interval*100L/duration;
-    if(interval>duration){
-      programStates[programNumber].stepStartMilliseconds=millis();
-      programStates[programNumber].currentStep = nextStepNumber;
-      programStates[programNumber].keep=true;
-    }
-  }
-
-  RgbColor colorMixed = mixColorsOfSteps(&thisStep,&nextStep,percent);
+  RgbColor colorMixed = mixColorsOfSteps(&thisStep,&nextStep,currentStepState.percent);
 
 
   // Todo: How is the lamp shema stored within the program?
