@@ -198,27 +198,30 @@ struct stepState findStepState(unsigned long milliseconds,unsigned long offset,b
   }
 };
 
+RgbColor getColorForTimeAndProgram(unsigned long milliseconds,byte programNumber){
+
+  byte percent;
+  
+  struct stepState currentStepState = findStepState(milliseconds,0,0);
+  int programStep=currentStepState.stepNumber;
+  int nextStepNumber=nextStep(programNumber,programStep);
+  struct programStep thisStep = programs[programNumber].steps[programStep];
+  struct programStep nextStep = programs[programNumber].steps[nextStepNumber];
+  return mixColorsOfSteps(&thisStep,&nextStep,currentStepState.percent);
+}
+
 void programExecutor(){
-  // Todo: Spagetthi coding
+  int programNumber = 0;
+
   if(programRunning==false){
     return;
   }
   if(reduceCalls()==true){
     return;
   }
+  unsigned long currentMillis = millis();
 
-  byte percent;
-  int programNumber = 0;
-
-  struct stepState currentStepState = findStepState(millis(),0,0);
-  int programStep=currentStepState.stepNumber;
-
-  byte nextStepNumber=nextStep(programNumber,programStep);
-  struct programStep thisStep = programs[programNumber].steps[programStep];
-  struct programStep nextStep = programs[programNumber].steps[nextStepNumber];
-  
-  RgbColor colorMixed = mixColorsOfSteps(&thisStep,&nextStep,currentStepState.percent);
-
+  RgbColor colorMixed = getColorForTimeAndProgram(currentMillis,programNumber);
 
   // Todo: How is the lamp shema stored within the program?
   LampSchema lampSchema = getLampSchema(0);
@@ -228,6 +231,7 @@ void programExecutor(){
       LampData lampData = getLampData(lampNumber);
       if(lampData.active==true){
         setDmxColor(lampNumber,colorMixed);
+        colorMixed = getColorForTimeAndProgram(currentMillis+(i+1)*1500,programNumber);
       }
     }
   }
