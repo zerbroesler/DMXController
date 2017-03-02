@@ -62,7 +62,7 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       0,        // Lamp schema
       150,0,0,  //values
       RGB,     // RGB
-      3000,     // keep duration before transistion
+      2000,     // keep duration before transistion
       1500,     // duration
       FADE_RGB,  // fade
       0,        // phase delay
@@ -92,15 +92,15 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       1,        // Lamp schema
       0,200,100, 
       RGB,     
-      3000,     
-      1500,     
+      500,     
+      500,     
       FADE_RGB, 
       0,        
     
       0,220,0,
       RGB,
-      2000,   
-      1500,
+      500,   
+      500,
       FADE_RGB,
       0,
 
@@ -222,7 +222,7 @@ RgbColor getColorForTimeAndProgram(unsigned long milliseconds,byte programNumber
 
   byte percent;
   
-  struct stepState currentStepState = findStepState(milliseconds,0,0);
+  struct stepState currentStepState = findStepState(milliseconds,0,programNumber);
   int programStep=currentStepState.stepNumber;
   int nextStepNumber=nextStep(programNumber,programStep);
   struct programStep thisStep = programs[programNumber].steps[programStep];
