@@ -59,25 +59,33 @@ struct programState programStates[MAX_PROGRAMS]={
 struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Blue 2&1 Second
     {
       3,        // Steps
-      50,0,0,  //values
+      150,0,0,  //values
       RGB,     // RGB
-      2000,     // keep duration before transistion
-      2000,     // duration
+      3000,     // keep duration before transistion
+      1500,     // duration
       1,        // lamp schema
       FADE_RGB,  // fade
       0,        // phase delay
     
-      0,0,80,
+      0,0,180,
       RGB,
       2000,   
-      2000,
+      1500,
       1,      
       FADE_RGB,
       0,
 
-      0,60,0,
+      0,160,0,
       RGB,   
       2000,
+      1500,
+      1,      
+      FADE_RGB,
+      0,
+
+      200,200,200,
+      RGB,   
+      100,
       2000,
       1,      
       FADE_RGB,
@@ -231,7 +239,7 @@ void programExecutor(){
       LampData lampData = getLampData(lampNumber);
       if(lampData.active==true){
         setDmxColor(lampNumber,colorMixed);
-        colorMixed = getColorForTimeAndProgram(currentMillis+(i+1)*1500,programNumber);
+        colorMixed = getColorForTimeAndProgram(currentMillis+(i+1)*800,programNumber);
       }
     }
   }

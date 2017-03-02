@@ -14,7 +14,7 @@ struct LampData lampsData[MAX_LAMPS] = {
 	{true,1,0},
 	{true,11,0},
 	{true,21,0},
-  {false,31,0},
+  {true,31,1},
   {false,41,0},
   {false,51,0},
   {false,61,0},
@@ -29,7 +29,7 @@ struct LampSchema{
 };
 
 struct LampSchema lampSchemas[MAX_LAMP_SCHEMAS] = {
-  {1,2,3,0,0,0,0,0},
+  {4,1,2,3,0,0,0,0},
   {4,3,2,1,0,0,0,0},
 };
 
