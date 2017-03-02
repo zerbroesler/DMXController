@@ -31,13 +31,13 @@ struct programStep{
   boolean colorType; // true=RGB,false=HSV
   unsigned int keepInMilliseconds;
   unsigned int durationInMilliseconds;
-  byte lampSchema;
   byte transistion;
   boolean phaseTroughLamps; // starts the program for each lamp in lampSchema delayed by 1/lamps
 };
 
 struct program{
   byte numberOfSteps;
+  byte lampSchema;
   struct programStep steps[MAX_PROGRAM_STEPS];
 };
 
@@ -58,20 +58,19 @@ struct programState programStates[MAX_PROGRAMS]={
 
 struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Blue 2&1 Second
     {
-      3,        // Steps
+      2,        // Steps
+      0,        // Lamp schema
       150,0,0,  //values
       RGB,     // RGB
       3000,     // keep duration before transistion
       1500,     // duration
-      1,        // lamp schema
       FADE_RGB,  // fade
       0,        // phase delay
     
-      0,0,180,
+      150,0,180,
       RGB,
       2000,   
       1500,
-      1,      
       FADE_RGB,
       0,
 
@@ -79,7 +78,6 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       RGB,   
       2000,
       1500,
-      1,      
       FADE_RGB,
       0,
 
@@ -87,11 +85,25 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       RGB,   
       100,
       2000,
-      1,      
       FADE_RGB,
       0,
-    },{
-      0
+    },{  // 2nd program
+      2,        // Steps
+      1,        // Lamp schema
+      0,200,100, 
+      RGB,     
+      3000,     
+      1500,     
+      FADE_RGB, 
+      0,        
+    
+      0,220,0,
+      RGB,
+      2000,   
+      1500,
+      FADE_RGB,
+      0,
+
     },{
       0
     },{
@@ -218,8 +230,28 @@ RgbColor getColorForTimeAndProgram(unsigned long milliseconds,byte programNumber
   return mixColorsOfSteps(&thisStep,&nextStep,currentStepState.percent);
 }
 
+void executeProgram(unsigned long currentMilliseconds,byte programNumber){
+  
+  byte lampSchemaNumber = programs[programNumber].lampSchema;
+  RgbColor colorMixed = getColorForTimeAndProgram(currentMilliseconds,programNumber);
+
+  LampSchema lampSchema = getLampSchema(lampSchemaNumber);
+
+  for(byte i = 0;i<MAX_LAMPS;i++){
+    byte lampNumber=lampSchema.sequence[i];
+    if(lampNumber>0){
+      LampData lampData = getLampData(lampNumber);
+      if(lampData.active==true){
+        setDmxColor(lampNumber,colorMixed);
+        // Get color for next lamp
+        colorMixed = getColorForTimeAndProgram(currentMilliseconds+(i+1)*800,programNumber);
+      }
+    }
+  }
+}
+
 void programExecutor(){
-  int programNumber = 0;
+  int programNumber = 1;
 
   if(programRunning==false){
     return;
@@ -229,19 +261,8 @@ void programExecutor(){
   }
   unsigned long currentMillis = millis();
 
-  RgbColor colorMixed = getColorForTimeAndProgram(currentMillis,programNumber);
-
-  // Todo: How is the lamp shema stored within the program?
-  LampSchema lampSchema = getLampSchema(0);
-  for(byte i = 0;i<MAX_LAMPS;i++){
-    byte lampNumber=lampSchema.sequence[i];
-    if(lampNumber>0){
-      LampData lampData = getLampData(lampNumber);
-      if(lampData.active==true){
-        setDmxColor(lampNumber,colorMixed);
-        colorMixed = getColorForTimeAndProgram(currentMillis+(i+1)*800,programNumber);
-      }
-    }
+  for(byte programNumber=0;programNumber<2;programNumber++){
+    executeProgram(currentMillis,programNumber);
   }
 }
 
