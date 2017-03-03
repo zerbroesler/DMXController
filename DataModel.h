@@ -4,6 +4,7 @@ long menuRelative = 0;
 boolean knobChanged[NUMKNOBS]={true,true,true,true};
 boolean menuPressed = false;
 boolean menuReleased = false;
+int knobMaximum=255;
 
 int knobMode=0;
 
@@ -13,6 +14,17 @@ void setKnobsLinear(){
 void setKnobsLogarithmic(){
   knobMode = 0;
 }
+
+void setKnobs100(){
+  knobMaximum=100;
+}
+void setKnobs255(){
+  knobMaximum=255;
+}
+int getKnobMaximum(){
+  return knobMaximum;
+}
+
 int getKnobMode(){
   return knobMode;
 }

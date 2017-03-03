@@ -30,8 +30,14 @@ void setMenuNumber(int number){
   menuNumber = number;
   menuSpecial = 0;  // Special have to end since the menu changed
   switch(menuId){
+    case 2:    // Run menu
+      setKnobsLinear();
+      setKnobs100();
+      Serial.println("x");
+      break;
     case 4:    // Test menu
       setKnobsLinear();
+      setKnobs255();
       stopProgram();
       break;
     default:

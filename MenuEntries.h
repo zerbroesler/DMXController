@@ -19,19 +19,19 @@ menuProperty menuProperties[MENUENTRIES] = {
 //"12345678901234567890",
 // Entry screen
   "   DMX Controller   ",
-  " Lamps  Color  Prog ",
+  "  Run   Lamps  Prog ",
   " Test               ",
   1,   4, {
     //X,Y, to
-    { 0,1,5,  2},  // Lamps
-    { 7,1,5,  3},  // Color
+    { 1,1,3,  2},  // Run
+    { 7,1,5,  3},  // Lamps
     {14,1,4,  0},  // Prog
     { 0,2,4,  4}}, // Test
 //
 //"12345678901234567890",
-  " < Lamp selection   ",
-  " 1 2 3 4 5 6 7 8 <- ",
-  "          ",
+  " <   Run Scene      ",
+  " 1 2 3 4 5 6 7 8 9  ",
+  " Speed       Bright ",
   2, 10, {
     {0,0,1,  1}, // Back
     {0,1,1,  0},
@@ -45,7 +45,7 @@ menuProperty menuProperties[MENUENTRIES] = {
     {16,1,2,  1}},
 //
 //"12345678901234567890",
-  " <  Color chooser   ",
+  " <   Lamp setup     ",
   " 1 2 3 4 5 6 7 8 <- ",
   "          ",
   3, 10, {

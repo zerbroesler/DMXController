@@ -11,3 +11,8 @@ Todo:
 
 - Blackout function
 
+
+
+Fade between different programs. 
+When a program is used which uses the same lamps, they need to be faded within a certain
+timeframe e.g. 1 second.

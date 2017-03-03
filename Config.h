@@ -1,7 +1,7 @@
 // Configuration for DMXController
 
 // UI
-#define DISPLAYSPEED 2000
+#define DISPLAYSPEED 133
 #define PROGRAMSPEED 100
 #define NUMKNOBS 4
 #define VALUEKNOBS 3

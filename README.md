@@ -35,46 +35,61 @@ Screen:
    1         10
 ```
 
-### Run
-Just runs the program. It has no UI, so it runs even when the user does something different in the UI except of Test which stops the program. The speed and the program number can be adjusted in the main menu with knobs 1 and 2. Knob 3 is currently not assigned.
+### Run scene
+Scene = combination of programs.
+Selects a scene to run. Only one scene can be active at the same time. Changing the scene will fade to the next scene within a short time (1/2 second).
+Scenes can be selected via the additional hardware buttons attached to pins 45, 47, 49, 51, 53 of the arduino mega.
+The speed can be adjusted with knobs 1.
+Master brigthness can be adjusted with knob 3
+Programs can be activated and deactivated by the menu knob (on/off).
 
+Screen:
+```
+ <    Run Scene
+(1*)2* 3  4* 5  6  7
+Speed         Bright
+ 100           100
+```
+ 
 ### Program
-Used to program a self-running show. Several programs can be defined, but currently only one is executed at a time. It may be possible to assign different programs to different lamps and run them simultaneously, but this is currently not possible.
-
+Used to program a self-running show. It is possible to assign different programs to different lamps and run them simultaneously.
+Programs need to be combined to scenes.
 A program consists of the following elements:
 
-#### Number
-Number to store the program. To make it not too confusing and since memory is limited there are currently 5 Programs supported. They may be started / changed via physical buttons attached to pins 45, 47, 49, 51, 53 of the arduino mega.
+#### Name
+A optional name to identify the program. Not yet implemented
 
 #### Assigned Lamps
-A Lamp configuration which use the program
+A Lamp configuration which is used by the program
 
 #### Effect
 A effect of this program which can be one of the following:
 * Fade RGB
 * Fade HSV
-* Switch (Blink)
 
 #### cycle
 Cycle through the assigned light in the sequence they are defined (change sequence possible?=> in light setup)
-* Time delay in ms
+* Time delay in ms   // Currently hard coded
 * Over all lamps
 * 1/x th of whole sequence
 
-
 #### colors / timing
-A list of colors which are used together with the timings in %. There are predefined colors, but they can also be selected via the rgb/hsv knobs
+A list of colors which are used together with the timings in milliseconds. There are predefined colors, but they can also be selected via the rgb/hsv knobs
 
 #### total speed
-Total speed for one 100% cycle in seconds
+Total speed for one 100% cycle in seconds. Currently not available.
 
-### Lamps
+### Lamps groups
 Assign lamps to lamp groups and edit their sequence. The same sequence number... (not possible, or meaningful?)
 ```
 Group: 1
  1 2 3 4 5 6 7 8
  1   2   3
 ```
+
+### DMX setup
+Assign lamp numbers to DMX addresses, select the DMX type (RGB, RGBW, other)
+For other there may be an assistant like "Test" which asks to identify the required channel like: "search for red channel".
 
 ### Test
 Test the DMXdevices connected.
