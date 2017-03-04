@@ -11,11 +11,11 @@ struct LampData{
 };
 struct LampData lampsData[MAX_LAMPS] = {
   // Temporary until ui config exists
-	{true,1,0},
-	{true,11,0},
-	{true,21,0},
-  {true,31,1},
-  {false,41,0},
+	{true,1,1},
+	{true,11,1},
+	{true,21,1},
+  {true,31,0},
+  {true,41,2},
   {false,51,0},
   {false,61,0},
   {false,71,0},
@@ -31,6 +31,7 @@ struct LampSchema{
 struct LampSchema lampSchemas[MAX_LAMP_SCHEMAS] = {
   {4,0,2,0,0,0,0,0},
   {0,1,0,3,0,0,0,0},
+  {0,0,0,0,5,0,0,0},  // Superhell
 };
 
 int lampCount = sizeof(lampsData)/sizeof(lampsData[0]);

@@ -103,13 +103,34 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       500,
       FADE_RGB,
       0,
+    },{  // 3rd program
+      3,        // Steps
+      2,        // Lamp schema
+      0,200,0, 
+      RGB,     
+      3500,     
+      5500,     
+      FADE_RGB, 
+      0,        
+    
+      0,0,255,
+      RGB,
+      2500,   
+      3500,
+      FADE_RGB,
+      0,
+
+      255,100,00,
+      RGB,
+      3500,   
+      3500,
+      FADE_RGB,
+      0,
 
     },{
-      0
+      0,0
     },{
-      0
-    },{
-      0
+      0,0
     }
 };
 
@@ -231,7 +252,9 @@ RgbColor getColorForTimeAndProgram(unsigned long milliseconds,byte programNumber
 }
 
 void executeProgram(unsigned long currentMilliseconds,byte programNumber){
-  
+  if(programs[programNumber].numberOfSteps==0){
+    return;
+  }
   byte lampSchemaNumber = programs[programNumber].lampSchema;
   RgbColor colorMixed = getColorForTimeAndProgram(currentMilliseconds,programNumber);
 
@@ -261,7 +284,7 @@ void programExecutor(){
   }
   unsigned long currentMillis = millis();
 
-  for(byte programNumber=0;programNumber<2;programNumber++){
+  for(byte programNumber=0;programNumber<MAX_PROGRAMS;programNumber++){
     executeProgram(currentMillis,programNumber);
   }
 }

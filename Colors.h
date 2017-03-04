@@ -5,12 +5,24 @@ typedef struct RgbColor
     byte b;
 } RgbColor;
 
+typedef struct RgbwColor
+{
+    byte r;
+    byte g;
+    byte b;
+    byte w;
+} RgbwColor;
+
 typedef struct HsvColor
 {
     byte h;
     byte s;
     byte v;
 } HsvColor;
+
+RgbColor RgbwToRgb(RgbwColor colorIn){
+  return {colorIn.r,colorIn.g,colorIn.b};
+}
 
 RgbColor HsvToRgb(HsvColor hsv)
 {
