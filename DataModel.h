@@ -29,15 +29,16 @@ int getKnobMode(){
   return knobMode;
 }
 
-long getKnobValue(int knobNumber){
-  return knobs[knobNumber];
-}
 void setKnobChanged(int knobNumber, boolean changed){
   knobChanged[knobNumber]=false;
 }
 
 boolean getKnobChanged(int knobNumber){
   return knobChanged[knobNumber];
+}
+
+int getKnobValue(int knobNumber){
+  return knobs[knobNumber];
 }
 
 int getKnobValueLog(int knobNumber){
@@ -76,8 +77,8 @@ void setKnobValue(int knobNumber,long difference,boolean pressed){
   if(value < 0){
     value = 0;
   }
-  if(value > 255){
-    value = 255;
+  if(value > knobMaximum){
+    value = knobMaximum;
   }
   knobs[knobNumber] = value;
   knobChanged[knobNumber]=true;

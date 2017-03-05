@@ -59,21 +59,3 @@ void readMenuKnob(){
   setMenuPressed(pressed);
 }
 
-float calculateValue(float value,long difference,boolean press){
-  int knobMaximum=getKnobMaximum();
-  if(press == false){
-    value += difference / 4.0;
-  }else{
-    float multiply = abs((value+((float)difference)/1.5) / 30.0 + 0.5);
-    
-    value += difference * multiply;
-  }
-  if(value < 0){
-    value = 0;
-  }
-  if(value > knobMaximum){
-    value = knobMaximum;
-  }
-  return value;
-}
-

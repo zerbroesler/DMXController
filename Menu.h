@@ -33,7 +33,6 @@ void setMenuNumber(int number){
     case 2:    // Run menu
       setKnobsLinear();
       setKnobs100();
-      Serial.println("x");
       break;
     case 4:    // Test menu
       setKnobsLinear();
