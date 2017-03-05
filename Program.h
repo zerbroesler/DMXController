@@ -1,10 +1,8 @@
 //
 // Light programs
 //
-// Lights with more than one possible color are not supported at the moment.
-//
 
-#define MAX_PROGRAMS 5
+#define MAX_PROGRAMS 10
 #define MAX_PROGRAM_STEPS 8
 
 #define RGB 1
@@ -127,6 +125,45 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       FADE_RGB,
       0,
 
+    },{  // 4th program (3)  // Very Blue
+      2,        // Steps
+      3,        // Lamp schema
+      0,0,100, 
+      RGB,     
+      1500,     
+      2500,     
+      FADE_RGB, 
+      0,        
+    
+      50,50,255,
+      RGB,
+      1000,   
+      1500,
+      FADE_RGB,
+      0,
+    },{  // 5th program (4)  // Deep Blue
+      2,        // Steps
+      2,        // Lamp schema
+      0,0,60, 
+      RGB,     
+      1000,     
+      2500,     
+      FADE_RGB, 
+      0,        
+    
+      0,60,1500,
+      RGB,
+      1000,   
+      2500,
+      FADE_RGB,
+      0,
+
+    },{
+      0,0
+    },{
+      0,0
+    },{
+      0,0
     },{
       0,0
     },{
@@ -273,8 +310,7 @@ void executeProgram(unsigned long currentMilliseconds,byte programNumber){
   }
 }
 
-void programExecutor(){
-  int programNumber = 1;
+void programExecutor(byte programNumber){
 
   if(programRunning==false){
     return;

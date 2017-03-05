@@ -17,6 +17,7 @@
 #include "Display.h"
 
 #include "Program.h"
+#include "Scene.h"
 
 #include "MenuEntries.h"
 #include "Menu.h"
@@ -49,7 +50,8 @@ void loop() {
   drawMenuEntry();
 
   // Run program
-  programExecutor();
+  sceneRunner(5);
+//  programExecutor();
   
   // DMX is automatically updated via timer interrupt of DMXSimple library
 }

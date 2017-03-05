@@ -32,6 +32,7 @@ struct LampSchema lampSchemas[MAX_LAMP_SCHEMAS] = {
   {4,0,2,0,0,0,0,0},
   {0,1,0,3,0,0,0,0},
   {0,0,0,0,5,0,0,0},  // Superhell
+  {4,1,2,3,0,0,0,0},  // All small
 };
 
 int lampCount = sizeof(lampsData)/sizeof(lampsData[0]);
