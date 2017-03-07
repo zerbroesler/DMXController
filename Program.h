@@ -10,7 +10,7 @@
 #define FADE_CONSTANT 3
 
 boolean programRunning = true;
-int programSpeedStep=0;
+long programSpeedStep=0;
 unsigned long globalProgramStart=0;
 
 struct values{
@@ -140,7 +140,7 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       FADE_RGB, 
       0,        
     
-      10,100,200,
+      0,200,20,
       RGB,
       200,   
       200,
@@ -233,7 +233,7 @@ byte nextStep(int programNumber, int programStep){
 
 boolean reduceCalls(){
   programSpeedStep++;
-  if(programSpeedStep<PROGRAMSPEED){
+  if(programSpeedStep < PROGRAMSPEED){
     return false;
   }else{
     programSpeedStep=0;

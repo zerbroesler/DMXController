@@ -26,7 +26,7 @@ void sceneRunner(byte sceneNumber){
   if(programRunning==false){
     return;
   }
-  if(reduceCalls()==true){
+  if(reduceCalls()==false){
     return;
   }
   
