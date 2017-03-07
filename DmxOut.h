@@ -33,7 +33,7 @@ RgbwColor CalculateRgbw(RgbColor color){
     byte g  = color.g;
     byte b  = color.b;
     int w = min((int)b,min((int)r,(int)g));
-    w/=2;
+//    w/=2;
     result.w = w;
     result.r = r-w;
     result.g = g-w;

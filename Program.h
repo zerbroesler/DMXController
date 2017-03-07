@@ -2,9 +2,6 @@
 // Light programs
 //
 
-#define MAX_PROGRAMS 10
-#define MAX_PROGRAM_STEPS 8
-
 #define RGB 1
 #define HSV 2
 
@@ -126,37 +123,61 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       0,
 
     },{  // 4th program (3)  // Very Blue
-      2,        // Steps
+      3,        // Steps
       3,        // Lamp schema
+
       0,0,100, 
       RGB,     
       1500,     
-      2500,     
+      1500,     
+      FADE_RGB, 
+      0,        
+
+      0,0,80, 
+      RGB,     
+      1500,     
+      200,     
       FADE_RGB, 
       0,        
     
-      50,50,255,
+      10,100,200,
       RGB,
-      1000,   
-      1500,
+      200,   
+      200,
       FADE_RGB,
       0,
     },{  // 5th program (4)  // Deep Blue
-      2,        // Steps
+      4,        // Steps
       2,        // Lamp schema
-      0,0,60, 
+      0,0,255, 
       RGB,     
-      1000,     
+      4000,     
       2500,     
       FADE_RGB, 
       0,        
     
-      0,60,1500,
+      0,50,50,
       RGB,
-      1000,   
+      0,   
+      3500,
+      FADE_RGB,
+      0,
+
+      0,255,0,
+      RGB,
+      4000,   
       2500,
       FADE_RGB,
       0,
+
+      0,50,50,
+      RGB,
+      0,   
+      3500,
+      FADE_RGB,
+      0,
+
+
 
     },{
       0,0

@@ -12,7 +12,7 @@ Encoder knob2(36,19);
 // Push down on knobs
 
 // Big Selector
-Encoder knob3(3, 24);
+Encoder knob3(24, 3);
 // Push down
 #define PUSH_3 26
 #define BACK3 40  // Button next to the selector to go back

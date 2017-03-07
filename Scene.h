@@ -23,6 +23,13 @@ struct Scene scenes[MAX_SCENES]={
 };
 
 void sceneRunner(byte sceneNumber){
+  if(programRunning==false){
+    return;
+  }
+  if(reduceCalls()==true){
+    return;
+  }
+  
   byte programNumber;
   for(int i=0;i<MAX_PROGRAMS;i++){
     programNumber = scenes[sceneNumber].programId[i];
