@@ -7,6 +7,7 @@
 
 #define FADE_RGB 1
 #define FADE_HSV 2
+#define FADE_RGB_LOW 3
 #define FADE_CONSTANT 3
 
 boolean programRunning = true;
@@ -53,6 +54,7 @@ struct programState programStates[MAX_PROGRAMS]={
 
 struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Blue 2&1 Second
     {
+      // Yellow, green white
       2,        // Steps
       0,        // Lamp schema
       150,0,0,  //values
@@ -83,6 +85,7 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       FADE_RGB,
       0,
     },{  // 2nd program
+      // Yellow
       2,        // Steps
       1,        // Lamp schema
       0,200,100, 
@@ -99,6 +102,7 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       FADE_RGB,
       0,
     },{  // 3rd program
+      // Green blue yellow
       3,        // Steps
       2,        // Lamp schema
       0,200,0, 
@@ -122,7 +126,8 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       FADE_RGB,
       0,
 
-    },{  // 4th program (3)  // Very Blue
+    },{  // 4th program (3) 
+      // Very Blue
       3,        // Steps
       3,        // Lamp schema
 
@@ -146,7 +151,8 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       200,
       FADE_RGB,
       0,
-    },{  // 5th program (4)  // Deep Blue
+    },{  // 5th program (4) 
+      // Deep Blue
       4,        // Steps
       2,        // Lamp schema
       0,0,255, 
@@ -177,12 +183,72 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       FADE_RGB,
       0,
 
+    },{  // 6th program (5)
+      // Pink and Purple
+      4,        // Steps
+      4,        // Lamp schema
+      255,40,40, 
+      RGB,     
+      4000,     
+      2500,     
+      FADE_RGB, 
+      0,        
+    
+      220,0,255,
+      RGB,
+      4000,   
+      2500,
+      FADE_RGB,
+      0,
+
+      200,100,150,
+      RGB,
+      2000,   
+      1500,
+      FADE_RGB,
+      0,
+
+      255,80,0,
+      RGB,
+      1000,   
+      2500,
+      FADE_RGB,
+      0,
+
+    },{  // 7th program (6)
+      // Complementary 1
+      4,        // Steps
+      0,        // Lamp schema
+      255,255,0, 
+      RGB,     
+      5000,     
+      2500,     
+      FADE_RGB_LOW, 
+      0,        
+    
+      0,0,255,
+      RGB,
+      5000,   
+      2500,
+      FADE_RGB_LOW,
+      0,
+
+      255,0,0,
+      RGB,
+      5000,   
+      2500,
+      FADE_RGB_LOW,
+      0,
+
+      0,255,255,
+      RGB,
+      5000,   
+      2500,
+      FADE_RGB_LOW,
+      0,
 
 
-    },{
-      0,0
-    },{
-      0,0
+
     },{
       0,0
     },{
@@ -259,6 +325,9 @@ struct RgbColor mixColorsOfSteps(programStep *thisStep, programStep *nextStep,in
     case FADE_RGB:
       colorMixed = mixColorRGB(colorFrom,colorTo,percent);
       break;
+    case FADE_RGB_LOW:
+      colorMixed = mixColorRGBLow(colorFrom,colorTo,percent);
+      break;
     case FADE_HSV:
       colorMixed = mixColorHSV(colorFrom,colorTo,percent);
       break;
@@ -309,11 +378,11 @@ RgbColor getColorForTimeAndProgram(unsigned long milliseconds,byte programNumber
   return mixColorsOfSteps(&thisStep,&nextStep,currentStepState.percent);
 }
 
-void executeProgram(unsigned long currentMilliseconds,byte programNumber){
+void executeProgram(unsigned long currentMilliseconds,byte programNumber,byte lampSchemaNumber){
   if(programs[programNumber].numberOfSteps==0){
     return;
   }
-  byte lampSchemaNumber = programs[programNumber].lampSchema;
+//  byte lampSchemaNumber = programs[programNumber].lampSchema;
   RgbColor colorMixed = getColorForTimeAndProgram(currentMilliseconds,programNumber);
 
   LampSchema lampSchema = getLampSchema(lampSchemaNumber);
@@ -331,18 +400,18 @@ void executeProgram(unsigned long currentMilliseconds,byte programNumber){
   }
 }
 
-void programExecutor(byte programNumber){
-
-  if(programRunning==false){
-    return;
-  }
-  if(reduceCalls()==true){
-    return;
-  }
-  unsigned long currentMillis = millis();
-
-  for(byte programNumber=0;programNumber<MAX_PROGRAMS;programNumber++){
-    executeProgram(currentMillis,programNumber);
-  }
-}
+//void programExecutor(byte programNumber){
+//
+//  if(programRunning==false){
+//    return;
+//  }
+//  if(reduceCalls()==true){
+//    return;
+//  }
+//  unsigned long currentMillis = millis();
+//
+//  for(byte programNumber=0;programNumber<MAX_PROGRAMS;programNumber++){
+//    executeProgram(currentMillis,programNumber);
+//  }
+//}
 

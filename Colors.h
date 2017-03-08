@@ -123,6 +123,19 @@ byte mixValues(int color1, int color2,int percent){
   int mixed = ((color1*(100-percent))+(color2*percent))/100;
   return (byte)mixed;
 };
+byte mixValuesLow(int color1, int color2,int percent){
+  int fastPercent = percent * 3 / 2;
+  int percent1 = (100 - fastPercent);
+  int percent2 = (fastPercent -50 );
+  if(percent1 < 0){
+    percent1 = 0;
+  };
+  if(percent2 < 0){
+    percent2 = 0;
+  };
+  int mixed = ((color1*percent1)+(color2*percent2))/100;
+  return (byte)mixed;
+};
 
 RgbColor mixColorRGB(RgbColor color1,RgbColor color2,int percent){
   byte r = mixValues(color1.r,color2.r,percent);
@@ -130,8 +143,16 @@ RgbColor mixColorRGB(RgbColor color1,RgbColor color2,int percent){
   byte b = mixValues(color1.b,color2.b,percent);
   RgbColor mixed = {r,g,b};
   return mixed;
-
 };
+RgbColor mixColorRGBLow(RgbColor color1,RgbColor color2,int percent){
+  // Similar as mixColorRGB, but is almost black in between
+  byte r = mixValuesLow(color1.r,color2.r,percent);
+  byte g = mixValuesLow(color1.g,color2.g,percent);
+  byte b = mixValuesLow(color1.b,color2.b,percent);
+  RgbColor mixed = {r,g,b};
+  return mixed;
+};
+
 
 RgbColor mixColorHSV(RgbColor color1,RgbColor color2,int percent){
   HsvColor hsv1 = RgbToHsv(color1);

@@ -134,6 +134,20 @@ void handleMenuSpecial(){
     case 2:
       menuSpecialDmxChannel();
       break;
+    case 81:
+    case 82:
+    case 83:
+    case 84:
+    case 85:
+    case 86:
+    case 87:
+    case 88:
+    case 89:
+      // Scene selection
+      byte myscene;
+      myscene = getMenuSpecial()-81;
+      setScene(myscene);
+      break;
     default:
     // Just ignore?
     #ifdef debug

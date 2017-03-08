@@ -16,4 +16,5 @@
 // programs
 #define MAX_PROGRAMS 10
 #define MAX_PROGRAM_STEPS 8
+#define MAX_SCENES 10
 

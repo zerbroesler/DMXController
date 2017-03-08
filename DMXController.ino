@@ -39,6 +39,7 @@ void setup() {
   setMenuNumber(0);
   setMenuEntry(0);
   startProgram();
+  setScene(3);
 }
 
 void loop() {
@@ -50,7 +51,7 @@ void loop() {
   drawMenuEntry();
 
   // Run program
-  sceneRunner(5);
+  sceneRunner();
 //  programExecutor();
   
   // DMX is automatically updated via timer interrupt of DMXSimple library
