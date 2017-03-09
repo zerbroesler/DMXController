@@ -32,6 +32,8 @@ struct Scene scenes[MAX_SCENES]={
   {3,3,
    4,2,
    255}, //5
+  {7,4,
+   255}, 
 };
 
 void setScene(byte newSceneNumber){

@@ -161,9 +161,9 @@ RgbColor mixColorHSV(RgbColor color1,RgbColor color2,int percent){
   int h1 = hsv1.h; // Need a bigger range
   int h2 = hsv2.h; // since hue is circular, we also want to go in both directions
 
-//  if(h2-h1>127){
-//    h1+=256;
-//  }
+  if(h2-h1>127){
+    h1+=256;
+  }
   if(h1-h2>127){
     h2+=256;
   }

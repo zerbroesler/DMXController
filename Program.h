@@ -191,28 +191,28 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       RGB,     
       4000,     
       2500,     
-      FADE_RGB, 
+      FADE_HSV, 
       0,        
     
       220,0,255,
       RGB,
       4000,   
       2500,
-      FADE_RGB,
+      FADE_HSV,
       0,
 
-      200,100,150,
+      200,60,100,
       RGB,
-      2000,   
+      4000,   
       1500,
-      FADE_RGB,
+      FADE_HSV,
       0,
 
-      255,80,0,
+      255,50,0,
       RGB,
       1000,   
       2500,
-      FADE_RGB,
+      FADE_HSV,
       0,
 
     },{  // 7th program (6)
@@ -247,10 +247,31 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       FADE_RGB_LOW,
       0,
 
+    },{  // 8th program (7)
+      // White shades to yellow
+      3,        // Steps
+      0,        // Lamp schema
+      255,255,255, 
+      RGB,     
+      5000,     
+      2500,     
+      FADE_HSV, 
+      0,        
+    
+      255,255,150,
+      RGB,
+      5000,   
+      2500,
+      FADE_HSV,
+      0,
 
+      200,255,255,
+      RGB,
+      5000,   
+      2500,
+      FADE_HSV,
+      0,
 
-    },{
-      0,0
     },{
       0,0
     },{
