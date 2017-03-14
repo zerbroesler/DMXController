@@ -20,7 +20,7 @@ struct Scene scenes[MAX_SCENES]={
   {6,0,
    6,1,
    255},
-  {2,2,
+  {8,3,
    255},
   {0,0,
    1,1,

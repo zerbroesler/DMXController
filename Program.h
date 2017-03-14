@@ -8,7 +8,8 @@
 #define FADE_RGB 1
 #define FADE_HSV 2
 #define FADE_RGB_LOW 3
-#define FADE_CONSTANT 3
+#define FADE_RGB_GLOW 4
+//#define FADE_CONSTANT 3
 
 boolean programRunning = true;
 long programSpeedStep=0;
@@ -33,7 +34,6 @@ struct programStep{
 
 struct program{
   byte numberOfSteps;
-  byte lampSchema;
   struct programStep steps[MAX_PROGRAM_STEPS];
 };
 
@@ -56,7 +56,6 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
     {
       // Yellow, green white
       2,        // Steps
-      0,        // Lamp schema
       150,0,0,  //values
       RGB,     // RGB
       2000,     // keep duration before transistion
@@ -87,7 +86,6 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
     },{  // 2nd program
       // Yellow
       2,        // Steps
-      1,        // Lamp schema
       0,200,100, 
       RGB,     
       500,     
@@ -104,7 +102,6 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
     },{  // 3rd program
       // Green blue yellow
       3,        // Steps
-      2,        // Lamp schema
       0,200,0, 
       RGB,     
       3500,     
@@ -129,7 +126,6 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
     },{  // 4th program (3) 
       // Very Blue
       3,        // Steps
-      3,        // Lamp schema
 
       0,0,100, 
       RGB,     
@@ -154,7 +150,6 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
     },{  // 5th program (4) 
       // Deep Blue
       4,        // Steps
-      2,        // Lamp schema
       0,0,255, 
       RGB,     
       4000,     
@@ -186,7 +181,6 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
     },{  // 6th program (5)
       // Pink and Purple
       4,        // Steps
-      4,        // Lamp schema
       255,40,40, 
       RGB,     
       4000,     
@@ -218,7 +212,6 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
     },{  // 7th program (6)
       // Complementary 1
       4,        // Steps
-      0,        // Lamp schema
       255,255,0, 
       RGB,     
       5000,     
@@ -250,7 +243,6 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
     },{  // 8th program (7)
       // White shades to yellow
       3,        // Steps
-      0,        // Lamp schema
       255,255,255, 
       RGB,     
       5000,     
@@ -271,9 +263,24 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       2500,
       FADE_HSV,
       0,
+      
+    },{  // 9th program (8)
+      // White turns off to black
+      2,        // Steps
+      255,255,255, 
+      RGB,     
+      3000,     
+      2500,     
+      FADE_RGB_GLOW, 
+      0,        
+    
+      0,0,0,
+      RGB,
+      500,   
+      200,
+      FADE_RGB,
+      0,
 
-    },{
-      0,0
     },{
       0,0
     }
@@ -348,6 +355,9 @@ struct RgbColor mixColorsOfSteps(programStep *thisStep, programStep *nextStep,in
       break;
     case FADE_RGB_LOW:
       colorMixed = mixColorRGBLow(colorFrom,colorTo,percent);
+      break;
+    case FADE_RGB_GLOW:
+      colorMixed = mixColorRGBGlow(colorFrom,colorTo,percent);
       break;
     case FADE_HSV:
       colorMixed = mixColorHSV(colorFrom,colorTo,percent);
