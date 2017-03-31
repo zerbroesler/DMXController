@@ -8,12 +8,57 @@
 byte sceneNumber = 0;
 
 struct Scene{
-  byte programId[MAX_PROGRAMS * 2];
-  
+  byte programId;
+  byte lampSchema;
 };
 
+LinkedList<LinkedList<struct Scene>> sceneList = LinkedList<LinkedList<struct Scene>>();
+LinkedList<struct Scene> currentScene;
 
-struct Scene scenes[MAX_SCENES]={
+void initScenes(){
+
+  LinkedList<struct Scene> scene=LinkedList<struct Scene>();
+
+  scene.add({5,4});
+  sceneList.add(scene);
+  scene=LinkedList<struct Scene>();
+  scene.add({6,0});
+  scene.add({6,1});
+  sceneList.add(scene);
+
+  scene=LinkedList<struct Scene>();
+  scene.add({8,3});
+  sceneList.add(scene);
+  scene=LinkedList<struct Scene>();
+  scene.add({0,0});
+  scene.add({1,1});
+  scene.add({2,2});
+  sceneList.add(scene);
+  scene=LinkedList<struct Scene>();
+  scene.add({3,3});
+  scene.add({4,2});
+  sceneList.add(scene);
+  scene=LinkedList<struct Scene>();
+  scene.add({7,4});
+  sceneList.add(scene);
+
+  
+  /*
+      Serial.println("scene init A");
+  LinkedList<struct Scene> scene3=LinkedList<struct Scene>();
+  scene3.add({0,0});
+  sceneList.add(scene3);
+      Serial.println("scene init B");
+  sceneList.add(scene2);
+      Serial.println("scene init C");
+*/
+  #ifdef debug
+    Serial.println("scene init done");
+  #endif  
+  currentScene = sceneList.get(0);
+};
+
+/*
   //Programs to run with 255 as end marker
   {5,4,
    255},
@@ -35,9 +80,17 @@ struct Scene scenes[MAX_SCENES]={
   {7,4,
    255}, 
 };
+*/
 
 void setScene(byte newSceneNumber){
   sceneNumber = newSceneNumber;
+  currentScene = sceneList.get(sceneNumber);
+  /*
+  #ifdef debug
+    Serial.println("-scenesize: ");
+    Serial.println(currentScene.size());
+  #endif
+  */
 }
 
 byte getScene(byte){
@@ -53,12 +106,11 @@ void sceneRunner(){
   }
   
   byte programNumber;
-  for(int i=0;i<MAX_PROGRAMS;i++){
-    programNumber = scenes[sceneNumber].programId[i*2];
-    if(programNumber==255){
-      break;
-    }
-    byte lampSchemaNumber = scenes[sceneNumber].programId[i*2 + 1];
+  for(int i=0;i<currentScene.size();i++){
+    programNumber =currentScene.get(i).programId;
+    Serial.println(programNumber);
+    byte lampSchemaNumber = currentScene.get(i).lampSchema;
+    Serial.println(lampSchemaNumber);
     unsigned long currentMillis = millis();
     executeProgram(currentMillis,programNumber,lampSchemaNumber);
   }

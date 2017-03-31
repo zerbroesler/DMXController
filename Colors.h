@@ -146,9 +146,9 @@ RgbColor mixColorRGB(RgbColor color1,RgbColor color2,int percent){
 };
 RgbColor mixColorRGBLow(RgbColor color1,RgbColor color2,int percent){
   // Similar as mixColorRGB, but is almost black in between
-  byte r = mixValues(color1.r,color2.r,percent);
-  byte g = mixValues(color1.g,color2.g,percent);
-  byte b = mixValues(color1.b,color2.b,percent);
+  byte r = mixValuesLow(color1.r,color2.r,percent);
+  byte g = mixValuesLow(color1.g,color2.g,percent);
+  byte b = mixValuesLow(color1.b,color2.b,percent);
   RgbColor mixed = {r,g,b};
   return mixed;
 };

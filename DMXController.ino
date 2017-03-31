@@ -6,6 +6,8 @@
 
 #define debug
 
+#include <LinkedList.h>
+
 
 // Project includes
 
@@ -39,7 +41,8 @@ void setup() {
   setMenuNumber(0);
   setMenuEntry(0);
   startProgram();
-  setScene(3);
+  initScenes();
+  setScene(1);
 }
 
 void loop() {

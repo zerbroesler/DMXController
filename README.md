@@ -13,11 +13,11 @@ More details on my Homepage
 Schematics follow...
 
 ## Software
-It is mainly an ui which uses an 20x4 characters display and some rotaty encoders / buttons.
+The software has a program executor and an UI which uses an 20x4 characters display and some rotary encoders / buttons.
 
 ## UI
 The UI shows menus which lead to other menus. This is needed due to the lack of space on the display.
-The 4th row of the display is usually used to show the values of the three rotary encoders. To make it obvious that the values belong to them they are physically placed directly below the display. They usually show RGB or HSV values.
+The 4th row of the display is usually used to show the values of the three rotary encoders. To make it obvious that the values belong to them they are physically placed directly below the display. They usually show RGB or HSV values, but could also show a speed value or other timing values
 
 
 ### Main Menu
@@ -39,28 +39,28 @@ Screen:
 Scene = combination of programs.
 Selects a scene to run. Only one scene can be active at the same time. Changing the scene will fade to the next scene within a short time (1/2 second).
 Scenes can be selected via the additional hardware buttons attached to pins 45, 47, 49, 51, 53 of the arduino mega.
-The speed can be adjusted with knobs 1.
+The speed can be adjusted with knob 1.
 Master brigthness can be adjusted with knob 3
-Programs can be activated and deactivated by the menu knob (on/off).
+A scene can be selected by the menu knob. Selecting one scene will cancel the scene selected before. The selected scene is shown with an 'X' instead of the scene number.
 
 Screen:
 ```
  <    Run Scene
-(1*)2* 3  4* 5  6  7
+(1)2 3 X 5 6 7 8 9
 Speed         Bright
  100           100
 ```
+
+A scene consists of a list of programs assigned to a lamp schema. 
+
  
 ### Program
-Used to program a self-running show. It is possible to assign different programs to different lamps and run them simultaneously.
+Used to program a self-running show. It is possible to assign different programs to a scene.
 Programs need to be combined to scenes.
 A program consists of the following elements:
 
 #### Name
 A optional name to identify the program. Not yet implemented
-
-#### Assigned Lamps
-A Lamp configuration which is used by the program
 
 #### Effect
 A effect of this program which can be one of the following:
