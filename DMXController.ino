@@ -11,6 +11,7 @@
 
 // Project includes
 
+#include "Tool.h"
 #include "Config.h"
 #include "Colors.h"
 #include "Lamps.h"
@@ -30,19 +31,20 @@
 
 
 void setup() {
-  #ifdef debug
-  Serial.begin(57600);
-  Serial.println("Debug started:");
-  #endif
-
-  dmxSetup();
-  displaySetup();
-  inputSetup();
-  setMenuNumber(0);
-  setMenuEntry(0);
-  startProgram();
-  initScenes();
-  setScene(1);
+    #ifdef debug
+    Serial.begin(57600);
+    Serial.println("Debug started:");
+    #endif
+  
+    dmxSetup();
+    displaySetup();
+    inputSetup();
+    setMenuNumber(0);
+    setMenuEntry(0);
+    startProgram();
+     Serial.println(availableMemory());
+    initScenes();
+    setScene(1);
 }
 
 void loop() {

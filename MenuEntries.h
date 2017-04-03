@@ -20,13 +20,14 @@ menuProperty menuProperties[MENUENTRIES] = {
 // Entry screen
   "   DMX Controller   ",
   "  Run   Lamps  Prog ",
-  " Test               ",
-  1,   4, {
+  " Scenes Test        ",
+  1,   5, {
     //X,Y, to
     { 1,1,3,  2},  // Run
     { 7,1,5,  3},  // Lamps
     {14,1,4,  0},  // Prog
-    { 0,2,4,  4}}, // Test
+    { 0,2,6,  0},  // Scenes
+    { 7,2,4,  4}}, // Test
 //
 //"12345678901234567890",
   " <   Run Scene      ",
@@ -46,8 +47,9 @@ menuProperty menuProperties[MENUENTRIES] = {
 //
 //"12345678901234567890",
   " <   Lamp setup     ",
-  " 1 2 3 4 5 6 7 8 <- ",
-  "          ",
+  " 1 2 3 4 5 6 7 8 9  ",
+  "Addr:    Type:RGBW  ",  // DMX start adress + Lamp type
+//  ???
   3, 10, {
     {0,0,2,  1}, // Back
     {0,1,1,  0},
@@ -62,7 +64,8 @@ menuProperty menuProperties[MENUENTRIES] = {
 //"12345678901234567890",
   " <   DMX Tester     ",
   " Addr:     Channels ",
-  "                    ",
+  "                    ", // Shows dmx offset (relative to address)
+                          // Shows values
   4, 3, {
     {0,0,2,  1}, // Back
     {0,1,5, -1}, // Address selection

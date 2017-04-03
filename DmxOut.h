@@ -3,7 +3,7 @@
 
 void dmxSetup(){
   DmxSimple.usePin(dmxPin);
-  DmxSimple.maxChannel(81);
+  DmxSimple.maxChannel(MAXCHANNEL);
 }
 
 void setDmxValue(int channel, int value){
@@ -83,7 +83,32 @@ void setDmxColor(byte lampNumber,RgbColor color){
 	  setDmxRGB(lamp.dmxAddress,color);
 	  break;
   }
-   
 };
 
+// DMX Merge
+// Stores multiple DMX sets, merges them and passes to DmxSimple
+//
+// Is it possible to identify unchanged values?
+// Idea: Initialize with 222 and use it as unchanged
+// when 222 is stored, it is increased by 1 to secure special meaning of 222
+// Since the high values have no visible difference this should not affect the visual impact
+//
+// bufferNumber can be 0 or 1
+//
+void clearDmxBuff(byte bufferNumber){
+}
+
+void mergeDmxBuffers(){
+// Buffers are merged into buffer 0;  
+}
+
+void writeDmxBuffers(){
+// Writes buffer 0 to DmxSimple  
+}
+
+void DmxProxy(int adress,byte value){
+  // Just a proxy for Buffer/or DmxSimple
+  // Could also check collisions for the same adress
+  DmxSimple.write(adress,value);
+}
 
