@@ -11,14 +11,14 @@ struct LampData{
 };
 struct LampData lampsData[MAX_LAMPS] = {
   // Temporary until ui config exists
-	{true,1,1},
+	{true,1,0},
 	{true,11,1},
 	{true,21,1},
   {true,31,0},
   {true,41,2},
-  {false,51,0},
-  {false,61,0},
-  {false,71,0},
+  {true,51,0},
+  {true,61,0},
+  {true,71,0},
 };
 
 // Shema is a list of lamps used in a program.

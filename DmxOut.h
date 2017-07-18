@@ -106,9 +106,9 @@ void writeDmxBuffers(){
 // Writes buffer 0 to DmxSimple  
 }
 
-void DmxProxy(int adress,byte value){
+/*void DmxProxy(int adress,byte value){
   // Just a proxy for Buffer/or DmxSimple
   // Could also check collisions for the same adress
   DmxSimple.write(adress,value);
-}
+}*/
 

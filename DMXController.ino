@@ -6,12 +6,11 @@
 
 #define debug
 
-#include <LinkedList.h>
 
 
 // Project includes
 
-#include "Tool.h"
+//#include "Tool.h"
 #include "Config.h"
 #include "Colors.h"
 #include "Lamps.h"
@@ -42,8 +41,6 @@ void setup() {
     setMenuNumber(0);
     setMenuEntry(0);
     startProgram();
-     Serial.println(availableMemory());
-    initScenes();
     setScene(1);
 }
 
@@ -56,7 +53,7 @@ void loop() {
   drawMenuEntry();
 
   // Run program
-  sceneRunner();
+//  sceneRunner();
 //  programExecutor();
   
   // DMX is automatically updated via timer interrupt of DMXSimple library

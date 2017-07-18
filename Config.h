@@ -16,7 +16,7 @@
 #define MAXCHANNEL 81
 
 // programs
-#define MAX_PROGRAMS 15
+#define MAX_PROGRAMS 10
 #define MAX_PROGRAM_STEPS 5
 #define MAX_SCENES 10
 
