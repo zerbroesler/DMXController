@@ -41,7 +41,7 @@ void setup() {
     setMenuNumber(0);
     setMenuEntry(0);
     startProgram();
-    setScene(1);
+    setScene(0);
 }
 
 void loop() {
@@ -52,7 +52,9 @@ void loop() {
   drawMenu();
   drawMenuEntry();
 
+
   // Run program
+  readButtons();
   sceneRunner();
 //  programExecutor();
   

@@ -5,6 +5,12 @@
 #define PUSH_1 34
 #define PUSH_2 38
 
+#define TAP1 45
+#define TAP2 47
+#define TAP3 49
+#define TAP4 51
+#define TAPB 53
+
 // Left, Middle, Right below display
 Encoder knob0(28, 2);
 Encoder knob1(32,18);
@@ -26,6 +32,14 @@ void inputSetup(){
   pinMode(PUSH_2,INPUT_PULLUP);
   pinMode(PUSH_3,INPUT_PULLUP);
   pinMode(BACK3,INPUT_PULLUP);
+
+  pinMode(TAP1,INPUT_PULLUP);
+  pinMode(TAP2,INPUT_PULLUP);
+  pinMode(TAP3,INPUT_PULLUP);
+  pinMode(TAP4,INPUT_PULLUP);
+  pinMode(TAPB,INPUT_PULLUP);
+
+  
 }
 
 boolean pressed = false;
@@ -57,5 +71,21 @@ void readMenuKnob(){
   }
   pressed = !digitalRead(pushpin[MENUKNOB]);
   setMenuPressed(pressed);
+}
+
+void readButtons(){
+  if(!digitalRead(TAP1)){
+    setScene(0);
+  }
+  if(!digitalRead(TAP2)){
+    setScene(1);
+  }
+  if(!digitalRead(TAP3)){
+    setScene(2);
+  }
+  if(!digitalRead(TAP4)){
+    setScene(3);
+  }
+
 }
 

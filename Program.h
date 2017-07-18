@@ -52,81 +52,94 @@ struct programState programStates[MAX_PROGRAMS]={
   {0},
 };
 
-struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Blue 2&1 Second
-    {
-      // Yellow, green white
+struct program programs[MAX_PROGRAMS]={
+    { // 0 : Yellow, green
       2,        // Steps
-      150,0,0,  //values
+      220,255,0,  //values
       RGB,     // RGB
-      2000,     // keep duration before transistion
-      2000,     // duration
+      3000,     // keep duration before transistion
+      3000,     // duration
       FADE_RGB,  // fade
       0,        // phase delay
     
-      150,0,180,
+      50,255,0,
+      RGB,
+      3000,   
+      3000,
+      FADE_RGB,
+      0,
+    },{ // 1 : Yellow, green inverse
+      2,        // Steps
+      50,255,0,  //values
+      RGB,     // RGB
+      3000,     // keep duration before transistion
+      3000,     // duration
+      FADE_RGB,  // fade
+      0,        // phase delay
+    
+      220,255,0,
+      RGB,
+      3000,   
+      3000,
+      FADE_RGB,
+      0,
+    },{ // 2 : CyanBlu - yellowgreen 
+      // Reddish
+      2,        // Steps
+      80,255,0, 
+      RGB,     
+      5000,     
+      5000,     
+      FADE_RGB, 
+      0,        
+    
+      0,255,80,
+      RGB,
+      5000,   
+      5000,
+      FADE_RGB,
+      0,
+    },{ // 3 : Yellow
+      // Reddish
+      2,        // Steps
+      255,255,0, 
+      RGB,     
+      3000,     
+      3000,     
+      FADE_RGB, 
+      0,        
+    
+      255,200,0,
+      RGB,
+      3000,   
+      3000,
+      FADE_RGB,
+      0,
+    },{  // 4: Cyan
+      3,        // Steps
+      30,200,255, 
+      RGB,     
+      2000,     
+      2000,     
+      FADE_RGB, 
+      0,        
+    
+      0,255,255,
       RGB,
       2000,   
-      1500,
-      FADE_RGB,
-      0,
-
-      0,160,0,
-      RGB,   
-      2000,
-      1500,
-      FADE_RGB,
-      0,
-
-      200,200,200,
-      RGB,   
-      100,
       2000,
       FADE_RGB,
       0,
-    },{  // 2nd program
-      // Yellow
+
+      0,255,155,
+      RGB,
+      2000,   
+      2000,
+      FADE_RGB,
+      0,
+
+    },{  // 5: Very Blue
       2,        // Steps
-      0,200,100, 
-      RGB,     
-      500,     
-      500,     
-      FADE_RGB, 
-      0,        
-    
-      0,220,0,
-      RGB,
-      500,   
-      500,
-      FADE_RGB,
-      0,
-    },{  // 3rd program
-      // Green blue yellow
-      3,        // Steps
-      0,200,0, 
-      RGB,     
-      3500,     
-      5500,     
-      FADE_RGB, 
-      0,        
-    
-      0,0,255,
-      RGB,
-      2500,   
-      3500,
-      FADE_RGB,
-      0,
-
-      255,100,00,
-      RGB,
-      3500,   
-      3500,
-      FADE_RGB,
-      0,
-
-    },{  // 4th program (3) 
-      // Very Blue
-      3,        // Steps
-
       0,0,100, 
       RGB,     
       1500,     
@@ -134,21 +147,13 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       FADE_RGB, 
       0,        
 
-      0,0,80, 
-      RGB,     
-      1500,     
-      200,     
-      FADE_RGB, 
-      0,        
-    
-      0,200,20,
+      20,0,100,
       RGB,
       200,   
       200,
       FADE_RGB,
       0,
-    },{  // 5th program (4) 
-      // Deep Blue
+    },{  // 6: Deep Blue
       4,        // Steps
       0,0,255, 
       RGB,     
@@ -178,8 +183,7 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       FADE_RGB,
       0,
 
-    },{  // 6th program (5)
-      // Pink and Purple
+    },{  // 7: Pink and Purple
       4,        // Steps
       255,40,40, 
       RGB,     
@@ -209,39 +213,7 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       FADE_HSV,
       0,
 
-    },{  // 7th program (6)
-      // Complementary 1
-      4,        // Steps
-      255,255,0, 
-      RGB,     
-      5000,     
-      2500,     
-      FADE_RGB_LOW, 
-      0,        
-    
-      0,0,255,
-      RGB,
-      5000,   
-      2500,
-      FADE_RGB_LOW,
-      0,
-
-      255,0,0,
-      RGB,
-      5000,   
-      2500,
-      FADE_RGB_LOW,
-      0,
-
-      0,255,255,
-      RGB,
-      5000,   
-      2500,
-      FADE_RGB_LOW,
-      0,
-
-    },{  // 8th program (7)
-      // White shades to yellow
+    },{  // 8: White shades to yellow
       3,        // Steps
       255,255,255, 
       RGB,     
@@ -264,23 +236,6 @@ struct program programs[MAX_PROGRAMS]={  // Demo program fade between Red and Bl
       FADE_HSV,
       0,
       
-    },{  // 9th program (8)
-      // White turns off to black
-      2,        // Steps
-      255,255,255, 
-      RGB,     
-      3000,     
-      2500,     
-      FADE_RGB_GLOW, 
-      0,        
-    
-      0,0,0,
-      RGB,
-      500,   
-      200,
-      FADE_RGB,
-      0,
-
     },{
       0,0
     }

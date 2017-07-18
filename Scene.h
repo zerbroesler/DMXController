@@ -13,29 +13,36 @@ struct Scene{
   byte programId[MAX_PROGRAMS * 2];
   
 };
-
-
+/*
+  {0,2,0,4,0,6,0,0},  // 0 even
+  {0,0,3,0,5,0,0,0},  // 1 odd
+  {1,0,0,0,0,0,0,0},  // 2 Big one
+  {0,0,0,0,0,0,0,8},  // 3 Superhell
+  {0,2,3,4,5,6,0,0},  // 4 All small
+  {1,2,3,4,5,6,0,8}   // 5 All together
+*/  
 struct Scene scenes[MAX_SCENES]={
   //Programs to run with 255 as end marker
-  {5,4,
-   255},
-  {6,0,
-   6,1,
-   255},
-  {8,3,
-   255},
   {0,0,
    1,1,
    2,2,
+   2,3,
    255},
-  {3,3,
-   4,2,
+   // 2
+  {3,1,
+   4,0,
+   2,2,
+   2,3,
    255},
-  {3,3,
-   4,2,
-   255}, //5
-  {7,4,
-   255}, 
+   // 3
+  {7,5, 
+   255},
+   // 4
+  {8,5,
+   255},
+   // Blackout button (Pause)
+  {5,5,   
+   255},
 };
 
 void setScene(byte newSceneNumber){
@@ -70,7 +77,6 @@ void sceneRunner(){
     Serial.print(programNumber);
     Serial.print(lampSchemaNumber);
     Serial.println("");
-    executeProgram(currentMillis,programNumber,lampSchemaNumber);
-    break;
+    executeProgram(currentMillis,programNumber,lampSchemaNumber/*,phaseDelay*/);
   }
 }

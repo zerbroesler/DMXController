@@ -1,7 +1,7 @@
 //
 // Lamp functions and definition
 //
-#define MAX_LAMP_SCHEMAS 5
+#define MAX_LAMP_SCHEMAS 6
 #define MAX_LAMPS 8
 
 struct LampData{
@@ -29,11 +29,12 @@ struct LampSchema{
 };
 
 struct LampSchema lampSchemas[MAX_LAMP_SCHEMAS] = {
-  {1,0,3,0,5,0,0,0},
-  {0,2,0,4,0,6,0,0},
-  {0,0,0,0,0,0,0,8},  // 2 Superhell
-  {1,2,3,4,5,6,0,0},  // 3 All small
-  {1,2,3,4,5,6,0,8},  // 4 All together
+  {0,2,0,4,0,6,0,0},  // 0 even
+  {0,0,3,0,5,0,0,0},  // 1 odd
+  {1,0,0,0,0,0,0,0},  // 2 Big one
+  {0,0,0,0,0,0,0,8},  // 3 Superhell
+  {0,2,3,4,5,6,0,0},  // 4 All small
+  {1,2,3,4,5,6,0,8}   // 5 All together
 };
 
 int lampCount = sizeof(lampsData)/sizeof(lampsData[0]);
