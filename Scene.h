@@ -2,7 +2,13 @@
 // Light scenes
 //
 // A light scene is a combination of programs.
+<<<<<<< HEAD
 // It is not checked if they conflict at the moment. 
+=======
+// It is not chekced if they conflict at the moment. 
+// All programs are executed at the same time
+//
+>>>>>>> parent of 3bf98e4... Revert "Comment change"
 // Be careful to not add two programs which influenece the same lamp
 //
 byte sceneNumber = 0;
