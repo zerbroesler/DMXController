@@ -53,7 +53,7 @@ void loop() {
   drawMenuEntry();
 
   // Run program
-//  sceneRunner();
+  sceneRunner();
 //  programExecutor();
   
   // DMX is automatically updated via timer interrupt of DMXSimple library

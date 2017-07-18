@@ -14,11 +14,11 @@ struct LampData lampsData[MAX_LAMPS] = {
 	{true,1,0},
 	{true,11,1},
 	{true,21,1},
-  {true,31,0},
-  {true,41,2},
-  {true,51,0},
-  {true,61,0},
-  {true,71,0},
+  {true,31,1},
+  {true,41,1},
+  {true,51,1},
+  {true,61,1},
+  {true,101,2},
 };
 
 // Shema is a list of lamps used in a program.
@@ -29,11 +29,11 @@ struct LampSchema{
 };
 
 struct LampSchema lampSchemas[MAX_LAMP_SCHEMAS] = {
-  {4,0,2,0,0,0,0,0},
-  {0,1,0,3,0,0,0,0},
-  {0,0,0,0,5,0,0,0},  // 2 Superhell
-  {4,1,2,3,0,0,0,0},  // 3 All small
-  {5,4,1,2,3,0,0,0},  // 4 All together
+  {1,0,3,0,5,0,0,0},
+  {0,2,0,4,0,6,0,0},
+  {0,0,0,0,0,0,0,8},  // 2 Superhell
+  {1,2,3,4,5,6,0,0},  // 3 All small
+  {1,2,3,4,5,6,0,8},  // 4 All together
 };
 
 int lampCount = sizeof(lampsData)/sizeof(lampsData[0]);
