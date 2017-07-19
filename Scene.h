@@ -23,25 +23,31 @@ struct Scene{
 */  
 struct Scene scenes[MAX_SCENES]={
   //Programs to run with 255 as end marker
-  {0,0,
+  {0,0,  // Green yellow
    1,1,
    2,2,
    2,3,
    255},
    // 2
-  {3,1,
-   4,0,
-   2,2,
-   2,3,
+  {3,0, // Blue Orange
+   4,1,
+   12,2,
+   12,3,
    255},
    // 3
-  {7,5, 
+  {7,5, // Pink Red Orange
    255},
    // 4
-  {8,5,
+  {9,0, // Blue and Red, Green in the back
+  10,1,
+  11,2,
+  11,3,
    255},
-   // Blackout button (Pause)
+   // 5 Blackout button (Pause) Dark Blue
   {5,5,   
+   255},
+   // 6
+  {8,5,  // White 
    255},
 };
 
@@ -73,10 +79,6 @@ void sceneRunner(){
     }
     byte lampSchemaNumber = scenes[sceneNumber].programId[i*2 + 1];
     unsigned long currentMillis = millis();
-    Serial.print(currentMillis);
-    Serial.print(programNumber);
-    Serial.print(lampSchemaNumber);
-    Serial.println("");
     executeProgram(currentMillis,programNumber,lampSchemaNumber/*,phaseDelay*/);
   }
 }

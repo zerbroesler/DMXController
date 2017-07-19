@@ -54,37 +54,37 @@ struct programState programStates[MAX_PROGRAMS]={
 
 struct program programs[MAX_PROGRAMS]={
     { // 0 : Yellow, green
-      2,        // Steps
-      220,255,0,  //values
-      RGB,     // RGB
-      3000,     // keep duration before transistion
-      3000,     // duration
-      FADE_RGB,  // fade
-      0,        // phase delay
+      2,          // Steps
+      170,255,0,  //values
+      RGB,        // RGB
+      7000,       // keep duration before transistion
+      1000,       // duration
+      FADE_RGB,   // fade
+      0,          // phase delay (unused)
     
-      50,255,0,
+      0,255,0,
       RGB,
-      3000,   
-      3000,
+      7000,   
+      1000,
       FADE_RGB,
       0,
     },{ // 1 : Yellow, green inverse
       2,        // Steps
-      50,255,0,  //values
+      0,255,0,  //values
       RGB,     // RGB
-      3000,     // keep duration before transistion
-      3000,     // duration
+      7000,     // keep duration before transistion
+      1000,     // duration
       FADE_RGB,  // fade
       0,        // phase delay
     
-      220,255,0,
+      170,255,0,
       RGB,
-      3000,   
-      3000,
+      7000,   
+      1000,
       FADE_RGB,
       0,
-    },{ // 2 : CyanBlu - yellowgreen 
-      // Reddish
+      
+    },{ // 2 : yellowgreen - cyanBlu
       2,        // Steps
       80,255,0, 
       RGB,     
@@ -99,8 +99,8 @@ struct program programs[MAX_PROGRAMS]={
       5000,
       FADE_RGB,
       0,
+      
     },{ // 3 : Yellow
-      // Reddish
       2,        // Steps
       255,255,0, 
       RGB,     
@@ -138,19 +138,19 @@ struct program programs[MAX_PROGRAMS]={
       FADE_RGB,
       0,
 
-    },{  // 5: Very Blue
+    },{  // 5: Dark Blue
       2,        // Steps
       0,0,100, 
       RGB,     
-      1500,     
-      1500,     
+      5000,     
+      5000,     
       FADE_RGB, 
       0,        
 
-      20,0,100,
+      0,0,70,
       RGB,
-      200,   
-      200,
+      5000,   
+      5000,
       FADE_RGB,
       0,
     },{  // 6: Deep Blue
@@ -201,7 +201,7 @@ struct program programs[MAX_PROGRAMS]={
 
       200,60,100,
       RGB,
-      4000,   
+      2000,   
       1500,
       FADE_HSV,
       0,
@@ -236,8 +236,101 @@ struct program programs[MAX_PROGRAMS]={
       FADE_HSV,
       0,
       
-    },{
-      0,0
+    },{  // 9: 
+      3,        // Red
+      255,50,50, 
+      RGB,     
+      5000,     
+      2500,     
+      FADE_HSV, 
+      0,        
+    
+      255,0,0,
+      RGB,
+      5000,   
+      2500,
+      FADE_HSV,
+      0,
+
+      255,50,0,
+      RGB,
+      5000,   
+      2500,
+      FADE_HSV,
+      0,
+    },{  // 10: 
+      3,        // Blue
+      0,0,255, 
+      RGB,     
+      5000,     
+      2500,     
+      FADE_HSV, 
+      0,        
+    
+      50,50,255,
+      RGB,
+      5000,   
+      2500,
+      FADE_HSV,
+      0,
+
+      50,0,255,
+      RGB,
+      5000,   
+      2500,
+      FADE_HSV,
+      0,
+    },{  // 11: 
+      3,        // Violett
+      100,0,255,
+      RGB,     
+      5000,     
+      2500,     
+      FADE_HSV, 
+      0,        
+    
+      100,50,255,
+      RGB,
+      5000,   
+      2500,
+      FADE_HSV,
+      0,
+
+      50,0,200,
+      RGB,
+      5000,   
+      2500,
+      FADE_HSV,
+      0,
+    },{ // 12 : Blue-Yellow
+      4,        // Steps
+      50,50,255, 
+      RGB,     
+      5000,     
+      5000,     
+      FADE_RGB, 
+      0,        
+    
+      50,100,150, 
+      RGB,     
+      5000,     
+      3000,     
+      FADE_RGB, 
+      0,        
+
+      255,255,50,
+      RGB,
+      5000,   
+      5000,
+      FADE_RGB,
+      0,
+
+      50,100,150,
+      RGB,
+      5000,   
+      3000,
+      FADE_RGB,
+      0,
     }
 };
 

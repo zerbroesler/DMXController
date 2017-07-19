@@ -4,7 +4,7 @@
 // 
 // Version for Arduino mega
 
-#define debug
+//#define debug
 
 
 

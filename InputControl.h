@@ -86,6 +86,9 @@ void readButtons(){
   if(!digitalRead(TAP4)){
     setScene(3);
   }
+  if(!digitalRead(TAPB)){
+    setScene(4);
+  }
 
 }
 

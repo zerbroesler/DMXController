@@ -149,6 +149,7 @@ void handleMenuSpecial(){
       setScene(myscene);
       break;
     default:
+      break;
     // Just ignore?
     #ifdef debug
       Serial.print("Illegal entry in menuspecial found:");
