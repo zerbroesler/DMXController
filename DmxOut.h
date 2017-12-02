@@ -62,6 +62,17 @@ void setDmxRGBW2(int dmxStart,RgbColor color){
     byte w=(int)w*(int)w/255L;
     DmxSimple.write(dmxStart+3,rgbwColor.w);   // White
 };
+void setDmxRGBW3(int dmxStart,RgbColor color){
+    RgbwColor rgbwColor = CalculateRgbw(color);
+    RgbColor  remainingColor = RgbwToRgb(rgbwColor);
+    DmxSimple.write(dmxStart+0,0);  // X Axis
+    DmxSimple.write(dmxStart+1,95);  // Y-Axis
+    DmxSimple.write(dmxStart+2,255);  // Power
+    setDmxRGB(dmxStart+3,remainingColor);
+    // Exponential color gradient as gamma correction
+    byte w=(int)w*(int)w/255L;
+    DmxSimple.write(dmxStart+6,rgbwColor.w);   // White
+};
 
 
 
@@ -78,6 +89,9 @@ void setDmxColor(byte lampNumber,RgbColor color){
     break;
   case 2:
     setDmxRGBW2(lamp.dmxAddress,color);
+    break;
+  case 3:
+    setDmxRGBW3(lamp.dmxAddress,color);
     break;
   default:
 	  setDmxRGB(lamp.dmxAddress,color);

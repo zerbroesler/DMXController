@@ -100,16 +100,16 @@ struct program programs[MAX_PROGRAMS]={
       FADE_RGB,
       0,
       
-    },{ // 3 : Yellow
+    },{ // 3 : Orange Yellow
       2,        // Steps
-      255,255,0, 
+      255,200,50, 
       RGB,     
       3000,     
       3000,     
       FADE_RGB, 
       0,        
     
-      255,200,0,
+      255,150,20,
       RGB,
       3000,   
       3000,
@@ -331,6 +331,23 @@ struct program programs[MAX_PROGRAMS]={
       3000,
       FADE_RGB,
       0,
+    },{ // 13 : Just White
+      1,        // Steps
+      255,255,255, 
+      RGB,     
+      5000,     
+      5000,     
+      FADE_RGB, 
+      0,        
+    },{ // 14 : Just Red
+      1,        // Steps
+      255,0,0, 
+      RGB,     
+      5000,     
+      5000,     
+      FADE_RGB, 
+      0,        
+
     }
 };
 

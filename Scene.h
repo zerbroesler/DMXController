@@ -29,19 +29,18 @@ struct Scene scenes[MAX_SCENES]={
    2,3,
    255},
    // 2
-  {3,0, // Blue Orange
-   4,1,
-   12,2,
-   12,3,
+  {3,0, // Cyan Back, Orange Front
+   3,4,
+   4,2,
+   4,3,
    255},
    // 3
   {7,5, // Pink Red Orange
    255},
    // 4
-  {9,0, // Blue and Red, Green in the back
-  10,1,
-  11,2,
-  11,3,
+  {13,4, // White with red in the background
+  14,2,
+  14,3,
    255},
    // 5 Blackout button (Pause) Dark Blue
   {5,5,   

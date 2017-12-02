@@ -1,8 +1,8 @@
 //
 // Lamp functions and definition
 //
-#define MAX_LAMP_SCHEMAS 6
-#define MAX_LAMPS 8
+#define MAX_LAMP_SCHEMAS 7
+#define MAX_LAMPS 9
 
 struct LampData{
 	bool active;     // On or off
@@ -17,7 +17,8 @@ struct LampData lampsData[MAX_LAMPS] = {
   {true,31,1},
   {true,41,1},
   {true,51,1},
-  {true,61,1},
+  {true,61,1},  // Not connected
+  {true,71,3},  // Movig head
   {true,101,2},
 };
 
@@ -32,9 +33,10 @@ struct LampSchema lampSchemas[MAX_LAMP_SCHEMAS] = {
   {0,2,0,4,0,6,0,0},  // 0 even
   {0,0,3,0,5,0,0,0},  // 1 odd
   {1,0,0,0,0,0,0,0},  // 2 Big one
-  {0,0,0,0,0,0,0,8},  // 3 Superhell
+  {0,0,0,0,0,0,8,9},  // 3 Superhell
   {0,2,3,4,5,6,0,0},  // 4 All small
-  {1,2,3,4,5,6,0,8}   // 5 All together
+  {1,2,3,4,5,6,8,9},  // 5 All together
+  {0,0,0,0,0,0,8,0}   // 6 Movinghead
 };
 
 int lampCount = sizeof(lampsData)/sizeof(lampsData[0]);
