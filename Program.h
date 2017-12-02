@@ -51,7 +51,7 @@ struct programState programStates[MAX_PROGRAMS]={
   {0},
   {0},
 };
-// Auftritt Gartenkonzert Juli 2017
+// Auftritt Roberts Geburtstag Dezember 2017
 struct program programs[MAX_PROGRAMS]={
     { // 0 : Yellow, green
       2,          // Steps
